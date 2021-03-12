@@ -146,6 +146,7 @@ public class HangmanGUIMainRobert extends Application {
 
     private void gameReset(){
         guessesLeft = 6;
+        guessesLeftDisplay.setText("");
         getNewWord();
         buttonMainHangmanGame();
         incrementHangman();
