@@ -11,29 +11,25 @@ import javafx.stage.Stage;
 
 public class inputBoxHangManGui extends Application {
 
-    HangmanGUIMainRobert hangmanGUIMainRobert = new HangmanGUIMainRobert();
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage){
         wordAndDefinitionMaker wordAndDefinitionMaker = new wordAndDefinitionMaker();
         VBox layout = new VBox(20);
         primaryStage.setTitle("Word Box");
-
-        TextField wordInput = new TextField("Enter in Word here");
-        TextField definitionHereInput = new TextField("Enter in Definition Here");
-        Button addAnotherWordButton = new Button("Add another Word");
+        TextField wordInput = new TextField();
+        wordInput.setPromptText("Enter in Word here");
+        TextField definitionHereInput = new TextField();
+        definitionHereInput.setPromptText("Enter in Definition Here");
+        Button addAnotherWordButton = new Button("Add Word");
         Button startGameButton = new Button("Start Game");
 
         addAnotherWordButton.setOnAction(event -> {
             String word = wordInput.getText();
             String definition = definitionHereInput.getText();
-
-            /*wordAndDefinitionMaker.wordListMaker(word);
-            wordAndDefinitionMaker.definitionListMaker(definition);*/
 
             wordAndDefinitionMaker.wordAndDefinitionMapper(word, definition);
 
@@ -42,17 +38,7 @@ public class inputBoxHangManGui extends Application {
         });
 
         startGameButton.setOnAction(event -> {
-            String word = wordInput.getText();
-            String definition = definitionHereInput.getText();
-
-            /*wordAndDefinitionMaker.wordListMaker(word);
-            wordAndDefinitionMaker.definitionListMaker(definition);
-
-            wordAndDefinitionMaker.printWordsList();
-            wordAndDefinitionMaker.printDefinitionList();*/
-            wordAndDefinitionMaker.wordAndDefinitionMapper(word, definition);
-            wordAndDefinitionMaker.printWordAndDefinition();
-
+            HangmanGUIMainRobert hangmanGUIMainRobert = new HangmanGUIMainRobert(wordAndDefinitionMaker.printWordAndDefinition());
             hangmanGUIMainRobert.start(primaryStage);
         });
 

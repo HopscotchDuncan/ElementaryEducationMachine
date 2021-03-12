@@ -12,7 +12,7 @@ public class EducationalEngine extends Application {
     inputBoxHangManGui inputBoxHangManGui = new inputBoxHangManGui();
 
     @Override
-    public void start(Stage Stage) throws Exception {
+    public void start(Stage Stage){
         StackPane layout = new StackPane();
         Button button = new Button("Hangman");
 
