@@ -15,7 +15,7 @@ public class HangmanMaker {
 
     public Line makeSpine() {
         Line spine = new Line();
-        spine.setTranslateX(hangmanSpineStartX + 19);
+        spine.setTranslateX(hangmanSpineStartX + 8);
         setStart(spine);
         spine.setEndX(100.0f);
         spine.setEndY(100.0f);
