@@ -192,7 +192,16 @@ public class HangmanGUIMainRobert extends Application {
     }
 
     private Label makeWordSpace() {
-        label.setText("_".repeat(hangmanWord.length()));
+        StringBuilder labelText = new StringBuilder();
+        String blankSpace = " ";
+        for (int i = 0; i<hangmanWord.length(); i++){
+            if (hangmanWord.charAt(i) == blankSpace.charAt(0)){
+                labelText.append(" ");
+            } else {
+                labelText.append("_");
+            }
+        }
+        label.setText(labelText.toString());
         return label;
     }
 }
