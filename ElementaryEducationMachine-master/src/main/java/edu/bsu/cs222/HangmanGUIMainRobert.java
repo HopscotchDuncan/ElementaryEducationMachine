@@ -30,7 +30,7 @@ public class HangmanGUIMainRobert extends Application {
     private final ArrayList<String> usedKeys = new ArrayList<>();
     private String hangmanWord = "";
     private int guessesLeft = 6;
-    Label label = new Label();
+    private final Label label = new Label();
     private Circle head;
     private Line spine;
     private Line leftArm;
