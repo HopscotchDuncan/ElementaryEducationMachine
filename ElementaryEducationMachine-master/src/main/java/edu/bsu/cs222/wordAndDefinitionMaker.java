@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class wordAndDefinitionMaker {
     HashMap<String,String> wordAndDefinition = new HashMap<>();
 
-    public void wordAndDefinitionMapper(String word, String Definition){
+    public void mapWordAndDefinition(String word, String Definition){
         wordAndDefinition.put(word, Definition);
     }
 

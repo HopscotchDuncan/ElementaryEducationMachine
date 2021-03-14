@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -29,6 +30,7 @@ public class HangmanGUIMainRobert extends Application {
     private final ArrayList<String> usedKeys = new ArrayList<>();
     private String hangmanWord = "";
     private int guessesLeft = 6;
+    Label label = new Label();
     private Circle head;
     private Line spine;
     private Line leftArm;
@@ -47,14 +49,14 @@ public class HangmanGUIMainRobert extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        getNewWord();
         VBox outerBox = new VBox();
-        outerBox.getChildren().addAll(inputBox(), button, outputBox());
+        outerBox.getChildren().addAll(makeInputBox(), button, makeOutputBox(), makeWordSpace());
         outerBox.setAlignment(Pos.CENTER);
         primaryStage.setTitle("Hangman");
         primaryStage.setResizable(false);
-        shapeSetUp(outerBox);
-        getNewWord();
-        buttonMainHangmanGame();
+        setUpShape(outerBox);
+        makeMainButton();
         primaryStage.setHeight(800);
         primaryStage.setWidth(1280);
         primaryStage.setScene(new Scene(outerBox));
@@ -62,7 +64,7 @@ public class HangmanGUIMainRobert extends Application {
     }
 
     //sets up shapes and makes them invisible
-    private void shapeSetUp(VBox vBox) {
+    private void setUpShape(VBox vBox) {
         head = hangmanMaker.makeHead();
         spine = hangmanMaker.makeSpine();
         leftArm = hangmanMaker.makeLeftArm();
@@ -78,12 +80,12 @@ public class HangmanGUIMainRobert extends Application {
         rightLeg.setVisible(false);
     }
 
-    public void buttonMainHangmanGame(){
+    public void makeMainButton(){
         button.setText("Guess");
         button.setOnAction((event) -> {
             if(guess.getText().length()>1){
                 if(hangmanChecker.isWordCorrect(guess.getText(),hangmanWord)){
-                    gameWin();
+                    endWinningGame();
                 }else{
                     guessesLeft -= 1;
                     guessesLeftDisplay.setText("Incorrect");
@@ -92,6 +94,7 @@ public class HangmanGUIMainRobert extends Application {
             }else if(guess.getText().length()==1){
                 if(hangmanChecker.isLetterCorrect(guess.getText(),hangmanWord)){
                     guessesLeftDisplay.setText("Correct Guess");
+                    changeWordSpace(guess.getText());
                 }else{
                     guessesLeft -= 1;
                     guessesLeftDisplay.setText("Incorrect");
@@ -103,10 +106,20 @@ public class HangmanGUIMainRobert extends Application {
         });
     }
 
-    private void gameWin() {
+    private void changeWordSpace(String guess) {
+        StringBuilder wordSpace = new StringBuilder(label.getText());
+        for (int i = 0; i < hangmanWord.length(); i++) {
+            if (guess.charAt(0) == hangmanWord.charAt(i)) {
+                wordSpace.setCharAt(i, hangmanWord.charAt(i));
+            }
+        }
+        label.setText(wordSpace.toString());
+    }
+
+    private void endWinningGame() {
         button.setText("Play Again?");
         guessesLeftDisplay.setText(wordBank.get(hangmanWord));
-        button.setOnAction((event) -> gameReset());
+        button.setOnAction((event) -> resetGame());
     }
 
     private void incrementHangman(){
@@ -131,7 +144,7 @@ public class HangmanGUIMainRobert extends Application {
             rightLeg.setVisible(true);
             //lose the game, set the button to restart
             button.setText("Try again");
-            button.setOnAction((event) -> gameReset());
+            button.setOnAction((event) -> resetGame());
         }
     }
 
@@ -144,11 +157,12 @@ public class HangmanGUIMainRobert extends Application {
         return blankedWord;
     }
 
-    private void gameReset(){
+    private void resetGame(){
         guessesLeft = 6;
         guessesLeftDisplay.setText("");
         getNewWord();
-        buttonMainHangmanGame();
+        label.setText("_".repeat(hangmanWord.length()));
+        makeMainButton();
         incrementHangman();
     }
 
@@ -161,7 +175,7 @@ public class HangmanGUIMainRobert extends Application {
         hangmanWord = getRandomWord();
     }
 
-    private HBox inputBox(){
+    private HBox makeInputBox(){
         HBox box = new HBox();
         guess.setPromptText("Input letter or word guess");
         box.getChildren().add(guess);
@@ -169,11 +183,16 @@ public class HangmanGUIMainRobert extends Application {
         return box;
     }
 
-    private HBox outputBox() {
+    private HBox makeOutputBox() {
         HBox bottomBox = new HBox();
         guessesLeftDisplay.setEditable(false);
         bottomBox.getChildren().add(guessesLeftDisplay);
         bottomBox.setAlignment(Pos.BASELINE_CENTER);
         return bottomBox;
+    }
+
+    private Label makeWordSpace() {
+        label.setText("_".repeat(hangmanWord.length()));
+        return label;
     }
 }
