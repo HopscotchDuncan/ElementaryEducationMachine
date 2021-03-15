@@ -26,10 +26,12 @@ public class GUIDuringGame extends Application {
     private final HashMap<String,String> wordBank;
     private final List<String> keys;
     private final ArrayList<String> usedKeys = new ArrayList<>();
-    private String solution = "";
+    private final ArrayList<String> usedLetters = new ArrayList<>();
+    private String solution;
     private int guessesLeft = 6;
     private final Label wordLabel = new Label();
     private final Label definitionLabel = new Label();
+    private final Label lettersLabel = new Label();
     private Circle head;
     private Line spine;
     private Line leftArm;
@@ -50,7 +52,7 @@ public class GUIDuringGame extends Application {
     public void start(Stage primaryStage) {
         getNewWord();
         VBox outerBox = new VBox();
-        outerBox.getChildren().addAll(makeInputBox(), button, makeOutputBox(), makeWordSpace(), definitionLabel);
+        outerBox.getChildren().addAll(makeInputBox(), button, makeOutputBox(), makeWordSpace(), definitionLabel, lettersLabel);
         outerBox.setAlignment(Pos.CENTER);
         primaryStage.setTitle("Hangman");
         primaryStage.setResizable(true);
@@ -102,6 +104,8 @@ public class GUIDuringGame extends Application {
             }else{
                 reaction.setText("No text inputted");
             }
+            usedLetters.add(guess.getText());
+            makeLettersDisplay();
         });
     }
 
@@ -173,6 +177,14 @@ public class GUIDuringGame extends Application {
     private void makeDefinitionSpace(String blankedWord) {
         String definition = wordBank.get(blankedWord);
         definitionLabel.setText(definition);
+    }
+
+    private void makeLettersDisplay() {
+        StringBuilder lettersList = new StringBuilder(" ");
+        for (String usedLetter : usedLetters) {
+            lettersList.append(" ").append(usedLetter).append(" ");
+        }
+        lettersLabel.setText("Used letters:" + lettersList);
     }
 
     private void resetGame(){
