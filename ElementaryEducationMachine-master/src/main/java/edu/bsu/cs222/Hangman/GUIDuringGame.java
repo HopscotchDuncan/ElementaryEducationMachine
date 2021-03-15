@@ -16,14 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-
 public class GUIDuringGame extends Application {
 
-    private final GuessChecker hangmanChecker = new GuessChecker();
+    private final GuessChecker guessChecker = new GuessChecker();
     private final DrawingCreator hangmanMaker = new DrawingCreator();
     private final Button button = new Button("Guess");
     private final TextField guess = new TextField();
-    private final TextField guessesLeftDisplay = new TextField();
+    private final TextField reaction = new TextField();
     private final HashMap<String,String> wordBank;
     private final List<String> keys;
     private final ArrayList<String> usedKeys = new ArrayList<>();
@@ -51,12 +50,12 @@ public class GUIDuringGame extends Application {
     public void start(Stage primaryStage) {
         getNewWord();
         VBox outerBox = new VBox();
-        outerBox.getChildren().addAll(makeInputBox(), button, makeOutputBox(), makeWordSpace(), makeDefinitionSpace());
+        outerBox.getChildren().addAll(makeInputBox(), button, makeOutputBox(), makeWordSpace(), definitionLabel);
         outerBox.setAlignment(Pos.CENTER);
         primaryStage.setTitle("Hangman");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         setUpShape(outerBox);
-        makeMainButton();
+        activateMainButton();
         primaryStage.setHeight(800);
         primaryStage.setWidth(1280);
         primaryStage.setScene(new Scene(outerBox));
@@ -80,36 +79,60 @@ public class GUIDuringGame extends Application {
         rightLeg.setVisible(false);
     }
 
-    public void makeMainButton(){
+    public void activateMainButton(){
         button.setText("Guess");
         button.setOnAction((event) -> {
             if(guess.getText().length()>1){
-                if(hangmanChecker.checkWord(guess.getText(), solution)){
+                if(guessChecker.checkWord(guess.getText(), solution)){
                     endWinningGame();
                 }else{
                     guessesLeft -= 1;
-                    guessesLeftDisplay.setText("Incorrect");
+                    reaction.setText("Incorrect");
                     incrementHangman();
                 }
             }else if(guess.getText().length()==1){
-                if(hangmanChecker.checkLetter(guess.getText(), solution)){
-                    guessesLeftDisplay.setText("Correct Guess");
+                if(guessChecker.checkLetter(guess.getText(), solution)){
+                    reaction.setText("Correct Guess");
                     changeWordSpace(guess.getText());
                 }else{
                     guessesLeft -= 1;
-                    guessesLeftDisplay.setText("Incorrect");
+                    reaction.setText("Incorrect");
                     incrementHangman();
                 }
             }else{
-                guessesLeftDisplay.setText("No text inputted");
+                reaction.setText("No text inputted");
             }
         });
     }
 
-    private void endWinningGame() {
-        button.setText("Play Again?");
-        guessesLeftDisplay.setText(wordBank.get(solution));
-        button.setOnAction((event) -> resetGame());
+    private HBox makeInputBox(){
+        HBox box = new HBox();
+        guess.setPromptText("Input letter or word guess");
+        box.getChildren().add(guess);
+        box.setAlignment(Pos.BOTTOM_CENTER);
+        return box;
+    }
+
+    private HBox makeOutputBox() {
+        HBox bottomBox = new HBox();
+        reaction.setEditable(false);
+        bottomBox.getChildren().add(reaction);
+        bottomBox.setAlignment(Pos.BASELINE_CENTER);
+        return bottomBox;
+    }
+
+    private Label makeWordSpace() {
+        StringBuilder wordText = new StringBuilder();
+        String blankSpace = " ";
+        for (int i = 0; i< solution.length(); i++){
+            if (solution.charAt(i) == blankSpace.charAt(0)){
+                wordText.append(" ");
+            } else {
+                wordText.append("_");
+            }
+        }
+        wordLabel.setText(wordText.toString());
+        return wordLabel;
     }
 
     private void incrementHangman(){
@@ -133,8 +156,7 @@ public class GUIDuringGame extends Application {
         } else if (guessesLeft == 0) {
             rightLeg.setVisible(true);
             //lose the game, set the button to restart
-            button.setText("Try again");
-            button.setOnAction((event) -> resetGame());
+            endLosingGame();
         }
     }
 
@@ -142,17 +164,23 @@ public class GUIDuringGame extends Application {
         Random r = new Random();
         int selection = r.nextInt(keys.size());
         String blankedWord = keys.get(selection);
+        makeDefinitionSpace(blankedWord);
         usedKeys.add(keys.get(selection));
         keys.remove(keys.get(selection));
         return blankedWord;
     }
 
+    private void makeDefinitionSpace(String blankedWord) {
+        String definition = wordBank.get(blankedWord);
+        definitionLabel.setText(definition);
+    }
+
     private void resetGame(){
         guessesLeft = 6;
-        guessesLeftDisplay.setText("");
+        reaction.setText("");
         getNewWord();
         wordLabel.setText("_".repeat(solution.length()));
-        makeMainButton();
+        activateMainButton();
         incrementHangman();
     }
 
@@ -165,36 +193,6 @@ public class GUIDuringGame extends Application {
         solution = getRandomWord();
     }
 
-    private HBox makeInputBox(){
-        HBox box = new HBox();
-        guess.setPromptText("Input letter or word guess");
-        box.getChildren().add(guess);
-        box.setAlignment(Pos.BOTTOM_CENTER);
-        return box;
-    }
-
-    private HBox makeOutputBox() {
-        HBox bottomBox = new HBox();
-        guessesLeftDisplay.setEditable(false);
-        bottomBox.getChildren().add(guessesLeftDisplay);
-        bottomBox.setAlignment(Pos.BASELINE_CENTER);
-        return bottomBox;
-    }
-
-    private Label makeWordSpace() {
-        StringBuilder wordText = new StringBuilder();
-        String blankSpace = " ";
-        for (int i = 0; i< solution.length(); i++){
-            if (solution.charAt(i) == blankSpace.charAt(0)){
-                wordText.append(" ");
-            } else {
-                wordText.append("_");
-            }
-        }
-        wordLabel.setText(wordText.toString());
-        return wordLabel;
-    }
-
     private void changeWordSpace(String guess) {
         StringBuilder wordSpace = new StringBuilder(wordLabel.getText());
         for (int i = 0; i < solution.length(); i++) {
@@ -205,8 +203,17 @@ public class GUIDuringGame extends Application {
         wordLabel.setText(wordSpace.toString());
     }
 
-    private Label makeDefinitionSpace() {
-        definitionLabel.setText(keys.get(0));
-        return definitionLabel;
+    private void endWinningGame() {
+        wordLabel.setText("Congratulations! The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
+        button.setText("Play Again?");
+        reaction.setText(wordBank.get(solution));
+        button.setOnAction((event) -> resetGame());
+    }
+
+    private void endLosingGame() {
+        wordLabel.setText("So close! The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
+        button.setText("Play Again?");
+        reaction.setText(wordBank.get(solution));
+        button.setOnAction((event) -> resetGame());
     }
 }
