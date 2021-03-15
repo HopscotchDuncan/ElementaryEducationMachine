@@ -216,16 +216,16 @@ public class GUIDuringGame extends Application {
     }
 
     private void endWinningGame() {
-        wordLabel.setText("Congratulations! The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
+        wordLabel.setText("The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
         button.setText("Play Again?");
-        reaction.setText("Correct!");
+        reaction.setText("Congratulations!");
         button.setOnAction((event) -> resetGame());
     }
 
     private void endLosingGame() {
-        wordLabel.setText("So close! The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
+        wordLabel.setText("The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
         button.setText("Play Again?");
-        reaction.setText("Incorrect.");
+        reaction.setText("So close!");
         button.setOnAction((event) -> resetGame());
     }
 }
