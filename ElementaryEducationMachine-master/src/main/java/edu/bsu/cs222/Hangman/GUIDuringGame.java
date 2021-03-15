@@ -218,14 +218,14 @@ public class GUIDuringGame extends Application {
     private void endWinningGame() {
         wordLabel.setText("Congratulations! The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
         button.setText("Play Again?");
-        reaction.setText(wordBank.get(solution));
+        reaction.setText("Correct!");
         button.setOnAction((event) -> resetGame());
     }
 
     private void endLosingGame() {
         wordLabel.setText("So close! The word was " + solution + "! Hit Play Again? to start a new game or the X in the top right to close the game.");
         button.setText("Play Again?");
-        reaction.setText(wordBank.get(solution));
+        reaction.setText("Incorrect.");
         button.setOnAction((event) -> resetGame());
     }
 }
