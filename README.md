@@ -1,3 +1,7 @@
 # ElementaryEducationMachine
 
-As it is, it just needs the display for the letters
+Code created by Andrew Dickinson, Robert Duncan, Dylan Donley, and Kaitlyn Jones
+
+This is a program dedicated to allowing teachers to play games with their students and keep them engaged in class. As of right now, only Hangman can be played. 
+
+To run the program, go to the right side and open Gradle -> ElementaryEducationMachine -> Tasks -> application -> run.
