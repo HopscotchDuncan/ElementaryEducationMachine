@@ -100,12 +100,12 @@ public class GUIDuringGame extends Application {
                     guessesLeft -= 1;
                     reaction.setText("Incorrect");
                     incrementHangman();
+                    usedLetters.add(guess.getText());
+                    makeLettersDisplay();
                 }
             }else{
                 reaction.setText("No text inputted");
             }
-            usedLetters.add(guess.getText());
-            makeLettersDisplay();
         });
     }
 
@@ -184,7 +184,7 @@ public class GUIDuringGame extends Application {
         for (String usedLetter : usedLetters) {
             lettersList.append(" ").append(usedLetter).append(" ");
         }
-        lettersLabel.setText("Used letters:" + lettersList);
+        lettersLabel.setText("Incorrect Letters:" + lettersList);
     }
 
     private void resetGame(){
