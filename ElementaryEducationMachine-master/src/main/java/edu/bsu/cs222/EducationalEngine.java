@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+import edu.bsu.cs222.Hangman.InputBox;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,7 +10,7 @@ import javafx.stage.Stage;
 
 
 public class EducationalEngine extends Application {
-    inputBoxHangManGui inputBoxHangManGui = new inputBoxHangManGui();
+    InputBox inputBoxHangManGui = new InputBox();
 
     @Override
     public void start(Stage Stage){

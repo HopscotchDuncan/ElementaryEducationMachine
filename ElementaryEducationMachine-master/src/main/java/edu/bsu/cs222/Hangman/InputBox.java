@@ -1,16 +1,15 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.Hangman;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class inputBoxHangManGui extends Application {
+public class InputBox extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -18,7 +17,7 @@ public class inputBoxHangManGui extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        wordAndDefinitionMaker wordAndDefinitionMaker = new wordAndDefinitionMaker();
+        WordBank wordAndDefinitionMaker = new WordBank();
         VBox layout = new VBox(20);
         primaryStage.setTitle("Word Box");
         TextField wordInput = new TextField();
@@ -27,30 +26,22 @@ public class inputBoxHangManGui extends Application {
         definitionHereInput.setPromptText("Enter in Definition Here");
         Button addAnotherWordButton = new Button("Add Word");
         Button startGameButton = new Button("Start Game");
-
         addAnotherWordButton.setOnAction(event -> {
             String word = wordInput.getText();
             String definition = definitionHereInput.getText();
-
             wordAndDefinitionMaker.mapWordAndDefinition(word, definition);
-
             wordInput.setText("");
             definitionHereInput.setText("");
         });
-
         startGameButton.setOnAction(event -> {
-            HangmanGUIMainRobert hangmanGUIMainRobert = new HangmanGUIMainRobert(wordAndDefinitionMaker.printWordAndDefinition());
-            hangmanGUIMainRobert.start(primaryStage);
+            GUIDuringGame guiDuringGame = new GUIDuringGame(wordAndDefinitionMaker.printWordAndDefinition());
+            guiDuringGame.start(primaryStage);
         });
-
         layout.getChildren().addAll(wordInput,definitionHereInput, addAnotherWordButton, startGameButton);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets( 100));
-
         Scene scene = new Scene(layout, 800, 500);
-
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 }

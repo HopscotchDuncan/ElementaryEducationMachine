@@ -1,9 +1,9 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.Hangman;
 
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public class HangmanMaker {
+public class DrawingCreator {
 
     int hangmanSpineStartX = 200;
 

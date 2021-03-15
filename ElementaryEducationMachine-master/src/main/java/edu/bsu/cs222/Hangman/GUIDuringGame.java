@@ -1,4 +1,4 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.Hangman;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -11,26 +11,26 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 
-public class HangmanGUIMainRobert extends Application {
+public class GUIDuringGame extends Application {
 
-    private final HangmanChecker hangmanChecker = new HangmanChecker();
-    private final HangmanMaker hangmanMaker = new HangmanMaker();
+    private final GuessChecker hangmanChecker = new GuessChecker();
+    private final DrawingCreator hangmanMaker = new DrawingCreator();
     private final Button button = new Button("Guess");
     private final TextField guess = new TextField();
     private final TextField guessesLeftDisplay = new TextField();
     private final HashMap<String,String> wordBank;
     private final List<String> keys;
     private final ArrayList<String> usedKeys = new ArrayList<>();
-    private String hangmanWord = "";
+    private String solution = "";
     private int guessesLeft = 6;
-    private final Label label = new Label();
+    private final Label wordLabel = new Label();
+    private final Label definitionLabel = new Label();
     private Circle head;
     private Line spine;
     private Line leftArm;
@@ -38,7 +38,7 @@ public class HangmanGUIMainRobert extends Application {
     private Line leftLeg;
     private Line rightLeg;
 
-    public HangmanGUIMainRobert(HashMap<String,String> wordBank){
+    public GUIDuringGame(HashMap<String,String> wordBank){
         this.wordBank = wordBank;
         keys = new ArrayList<>(wordBank.keySet());
     }
@@ -51,7 +51,7 @@ public class HangmanGUIMainRobert extends Application {
     public void start(Stage primaryStage) {
         getNewWord();
         VBox outerBox = new VBox();
-        outerBox.getChildren().addAll(makeInputBox(), button, makeOutputBox(), makeWordSpace());
+        outerBox.getChildren().addAll(makeInputBox(), button, makeOutputBox(), makeWordSpace(), makeDefinitionSpace());
         outerBox.setAlignment(Pos.CENTER);
         primaryStage.setTitle("Hangman");
         primaryStage.setResizable(false);
@@ -84,7 +84,7 @@ public class HangmanGUIMainRobert extends Application {
         button.setText("Guess");
         button.setOnAction((event) -> {
             if(guess.getText().length()>1){
-                if(hangmanChecker.isWordCorrect(guess.getText(),hangmanWord)){
+                if(hangmanChecker.checkWord(guess.getText(), solution)){
                     endWinningGame();
                 }else{
                     guessesLeft -= 1;
@@ -92,7 +92,7 @@ public class HangmanGUIMainRobert extends Application {
                     incrementHangman();
                 }
             }else if(guess.getText().length()==1){
-                if(hangmanChecker.isLetterCorrect(guess.getText(),hangmanWord)){
+                if(hangmanChecker.checkLetter(guess.getText(), solution)){
                     guessesLeftDisplay.setText("Correct Guess");
                     changeWordSpace(guess.getText());
                 }else{
@@ -106,19 +106,9 @@ public class HangmanGUIMainRobert extends Application {
         });
     }
 
-    private void changeWordSpace(String guess) {
-        StringBuilder wordSpace = new StringBuilder(label.getText());
-        for (int i = 0; i < hangmanWord.length(); i++) {
-            if (guess.charAt(0) == hangmanWord.charAt(i)) {
-                wordSpace.setCharAt(i, hangmanWord.charAt(i));
-            }
-        }
-        label.setText(wordSpace.toString());
-    }
-
     private void endWinningGame() {
         button.setText("Play Again?");
-        guessesLeftDisplay.setText(wordBank.get(hangmanWord));
+        guessesLeftDisplay.setText(wordBank.get(solution));
         button.setOnAction((event) -> resetGame());
     }
 
@@ -161,7 +151,7 @@ public class HangmanGUIMainRobert extends Application {
         guessesLeft = 6;
         guessesLeftDisplay.setText("");
         getNewWord();
-        label.setText("_".repeat(hangmanWord.length()));
+        wordLabel.setText("_".repeat(solution.length()));
         makeMainButton();
         incrementHangman();
     }
@@ -172,7 +162,7 @@ public class HangmanGUIMainRobert extends Application {
             keys.addAll(usedKeys);
             usedKeys.clear();
         }
-        hangmanWord = getRandomWord();
+        solution = getRandomWord();
     }
 
     private HBox makeInputBox(){
@@ -192,16 +182,31 @@ public class HangmanGUIMainRobert extends Application {
     }
 
     private Label makeWordSpace() {
-        StringBuilder labelText = new StringBuilder();
+        StringBuilder wordText = new StringBuilder();
         String blankSpace = " ";
-        for (int i = 0; i<hangmanWord.length(); i++){
-            if (hangmanWord.charAt(i) == blankSpace.charAt(0)){
-                labelText.append(" ");
+        for (int i = 0; i< solution.length(); i++){
+            if (solution.charAt(i) == blankSpace.charAt(0)){
+                wordText.append(" ");
             } else {
-                labelText.append("_");
+                wordText.append("_");
             }
         }
-        label.setText(labelText.toString());
-        return label;
+        wordLabel.setText(wordText.toString());
+        return wordLabel;
+    }
+
+    private void changeWordSpace(String guess) {
+        StringBuilder wordSpace = new StringBuilder(wordLabel.getText());
+        for (int i = 0; i < solution.length(); i++) {
+            if (guess.charAt(0) == solution.charAt(i)) {
+                wordSpace.setCharAt(i, solution.charAt(i));
+            }
+        }
+        wordLabel.setText(wordSpace.toString());
+    }
+
+    private Label makeDefinitionSpace() {
+        definitionLabel.setText(keys.get(0));
+        return definitionLabel;
     }
 }
