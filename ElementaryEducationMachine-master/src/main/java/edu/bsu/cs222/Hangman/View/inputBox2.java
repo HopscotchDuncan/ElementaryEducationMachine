@@ -1,5 +1,6 @@
-package edu.bsu.cs222.Hangman;
+package edu.bsu.cs222.Hangman.View;
 
+import edu.bsu.cs222.Hangman.Model.WordBank;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class InputBox extends Application {
+public class inputBox2 extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -26,6 +27,7 @@ public class InputBox extends Application {
         definitionHereInput.setPromptText("Enter in Definition Here");
         Button addAnotherWordButton = new Button("Add Word");
         Button startGameButton = new Button("Start Game");
+
         addAnotherWordButton.setOnAction(event -> {
             String word = wordInput.getText();
             String definition = definitionHereInput.getText();
@@ -33,6 +35,7 @@ public class InputBox extends Application {
             wordInput.setText("");
             definitionHereInput.setText("");
         });
+
         startGameButton.setOnAction(event -> {
             GUIDuringGame guiDuringGame = new GUIDuringGame(wordAndDefinitionMaker.printWordAndDefinition());
             guiDuringGame.start(primaryStage);
@@ -40,8 +43,11 @@ public class InputBox extends Application {
         layout.getChildren().addAll(wordInput,definitionHereInput, addAnotherWordButton, startGameButton);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets( 100));
+
         Scene scene = new Scene(layout, 800, 500);
+        scene.getStylesheets().add("vector.css");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 }

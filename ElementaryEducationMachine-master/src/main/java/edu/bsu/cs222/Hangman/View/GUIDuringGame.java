@@ -1,5 +1,7 @@
-package edu.bsu.cs222.Hangman;
+package edu.bsu.cs222.Hangman.View;
 
+import edu.bsu.cs222.Hangman.Model.DrawingCreator;
+import edu.bsu.cs222.Hangman.Model.GuessChecker;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

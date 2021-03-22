@@ -1,5 +1,6 @@
 package edu.bsu.cs222.Hangman;
 
+import edu.bsu.cs222.Hangman.Model.GuessChecker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

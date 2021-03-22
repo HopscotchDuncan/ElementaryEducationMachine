@@ -1,4 +1,4 @@
-package edu.bsu.cs222.Hangman;
+package edu.bsu.cs222.Hangman.Model;
 
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
