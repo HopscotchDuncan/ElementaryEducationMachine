@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 
 
 public class inputBox extends Stage {
-    Hangman hang = new Hangman();
 
     public inputBox(){
         Scene scene = createUI();
@@ -46,7 +45,6 @@ public class inputBox extends Stage {
 
         Button startGame = new Button("Start game");
 
-        startGame.setOnAction(e -> hang.show());
 
         return startGame;
     }
