@@ -16,7 +16,13 @@ edu/bsu/cs222/Jeopardy/View/JeopardyAnswer.java
  edu.bsu.cs222.Jeopardy.View.JeopardyAnswer
 edu/bsu/cs222/Jeopardy/View/JeopardyQuestion.java
  edu.bsu.cs222.Jeopardy.View.JeopardyQuestion
+edu/bsu/cs222/Jeopardy/View/JeopardyFinalResults.java
+ edu.bsu.cs222.Jeopardy.View.JeopardyFinalResults
 edu/bsu/cs222/EducationalEngine.java
  edu.bsu.cs222.EducationalEngine
 edu/bsu/cs222/Jeopardy/View/JeopardyGUI.java
  edu.bsu.cs222.Jeopardy.View.JeopardyGUI
+edu/bsu/cs222/Jeopardy/View/JeopardySettingsGUI.java
+ edu.bsu.cs222.Jeopardy.View.JeopardySettingsGUI
+edu/bsu/cs222/Jeopardy/View/FinalJeopardyAnswer.java
+ edu.bsu.cs222.Jeopardy.View.FinalJeopardyAnswer

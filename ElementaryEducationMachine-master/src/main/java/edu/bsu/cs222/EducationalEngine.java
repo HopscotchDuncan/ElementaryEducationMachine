@@ -2,6 +2,7 @@ package edu.bsu.cs222;
 
 import edu.bsu.cs222.Hangman.View.inputBox;
 import edu.bsu.cs222.Jeopardy.View.JeopardyGUI;
+import edu.bsu.cs222.Jeopardy.View.JeopardySettingsGUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 
 public class EducationalEngine extends Application {
     inputBox inputBox = new inputBox();
-    JeopardyGUI jeopardyGUI = new JeopardyGUI();
+    JeopardySettingsGUI jeopardySettingsGUI = new JeopardySettingsGUI();
 
     @Override
     public void start(Stage primaryStage){
@@ -44,7 +45,7 @@ public class EducationalEngine extends Application {
         button.setOnAction(e ->{
             stage.close();
             try {
-                jeopardyGUI.start(stage);
+                jeopardySettingsGUI.start(stage);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
