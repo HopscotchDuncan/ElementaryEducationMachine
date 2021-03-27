@@ -1,14 +1,18 @@
-edu/bsu/cs222/Hangman/View/GUIDuringGame.java
- edu.bsu.cs222.Hangman.View.GUIDuringGame
 edu/bsu/cs222/Hangman/Model/DrawingCreator.java
  edu.bsu.cs222.Hangman.Model.DrawingCreator
-edu/bsu/cs222/Hangman/Model/WordBank.java
- edu.bsu.cs222.Hangman.Model.WordBank
-edu/bsu/cs222/Hangman/Model/GuessChecker.java
- edu.bsu.cs222.Hangman.Model.GuessChecker
 edu/bsu/cs222/EducationalEngine.java
  edu.bsu.cs222.EducationalEngine
+edu/bsu/cs222/Hangman/View/hangmanMain.java
+ edu.bsu.cs222.Hangman.View.hangmanMain
+edu/bsu/cs222/Hangman/Model/WordBank.java
+ edu.bsu.cs222.Hangman.Model.WordBank
 edu/bsu/cs222/Hangman/View/inputBox2.java
  edu.bsu.cs222.Hangman.View.inputBox2
+edu/bsu/cs222/Hangman/Model/GuessChecker.java
+ edu.bsu.cs222.Hangman.Model.GuessChecker
 edu/bsu/cs222/Hangman/View/inputBox.java
  edu.bsu.cs222.Hangman.View.inputBox
+ edu.bsu.cs222.Hangman.View.inputBox$inputBoxButtons
+ edu.bsu.cs222.Hangman.View.inputBox$inputBoxTextsFields
+edu/bsu/cs222/Hangman/View/hangman.java
+ edu.bsu.cs222.Hangman.View.hangman

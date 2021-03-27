@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class GUIDuringGame extends Application {
+public class hangmanMain extends Application {
 
     private final GuessChecker guessChecker = new GuessChecker();
     private final DrawingCreator hangmanMaker = new DrawingCreator();
@@ -41,7 +41,7 @@ public class GUIDuringGame extends Application {
     private Line leftLeg;
     private Line rightLeg;
 
-    public GUIDuringGame(HashMap<String,String> wordBank){
+    public hangmanMain(HashMap<String,String> wordBank){
         this.wordBank = wordBank;
         keys = new ArrayList<>(wordBank.keySet());
     }

@@ -1,12 +1,9 @@
 package edu.bsu.cs222;
 
 import edu.bsu.cs222.Hangman.View.inputBox;
-import edu.bsu.cs222.Hangman.View.inputBox2;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 

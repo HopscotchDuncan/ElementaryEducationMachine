@@ -37,7 +37,7 @@ public class inputBox2 extends Application {
         });
 
         startGameButton.setOnAction(event -> {
-            GUIDuringGame guiDuringGame = new GUIDuringGame(wordAndDefinitionMaker.printWordAndDefinition());
+            hangmanMain guiDuringGame = new hangmanMain(wordAndDefinitionMaker.printWordAndDefinition());
             guiDuringGame.start(primaryStage);
         });
         layout.getChildren().addAll(wordInput,definitionHereInput, addAnotherWordButton, startGameButton);
