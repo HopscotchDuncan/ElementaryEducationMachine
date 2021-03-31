@@ -12,9 +12,11 @@ import javafx.stage.Stage;
 
 public class JeopardyGUI extends Application {
 
-    JeopardyAnswer exampleAnswer = new JeopardyAnswer("Example Answer");
-    JeopardyQuestion exampleQuestion = new JeopardyQuestion("Example Question", exampleAnswer);
-    FinalJeopardyAnswer finalJeopardyAnswer = new FinalJeopardyAnswer("Example Final Jeopardy Answer");
+    JeopardyAnswer exampleAnswer = new JeopardyAnswer("What is an extremely long String value for both Question and Answer for the purpose of testing",
+            "Return to Board");
+    JeopardyQuestion exampleQuestion = new JeopardyQuestion("This is something that Robert is using to test longer questions and answers," +
+            " making it possible to see both if the text aligns correctly, but if the formatting is correct.", exampleAnswer);
+    JeopardyAnswer finalJeopardyAnswer = new JeopardyAnswer("Example Final Jeopardy Answer", "Quit Game");
     JeopardyQuestion finalJeopardyQuestion = new JeopardyQuestion("Example Final Jeopardy", finalJeopardyAnswer);
     Button skipToFinalJeopardy = new Button("To Final\nJeopardy->");
 
@@ -51,11 +53,15 @@ public class JeopardyGUI extends Application {
             }
         }
         gridPane.setAlignment(Pos.CENTER);
+        finalJeopardySetUp(layout, stage, gridPane);
+    }
+
+    private void finalJeopardySetUp(StackPane layout, Stage stage, GridPane gridPane) {
+        stylizeButton(skipToFinalJeopardy);
         skipToFinalJeopardy.setOnAction((event) -> {
             finalJeopardyQuestion.show();
             stage.close();
         });
-        stylizeButton(skipToFinalJeopardy);
         gridPane.add(skipToFinalJeopardy, 5,9);
         layout.getChildren().add(gridPane);
     }
