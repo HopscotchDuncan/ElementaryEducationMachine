@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class JeopardySettingsGUI extends Application {
@@ -20,16 +21,14 @@ public class JeopardySettingsGUI extends Application {
         VBox layout = new VBox();
         settingsSetUp(layout);
         finalJeopardyOptionSetUp(layout);
-        buttonSetUp(layout,primaryStage);
+        gameStartSetUp(layout,primaryStage);
         primaryStage.setScene(new Scene(layout));
         primaryStage.show();
     }
 
-    private void buttonSetUp(VBox vBox, Stage stage) {
-        Button addCategory = new Button("Add category");
+    private void gameStartSetUp(VBox vBox, Stage stage) {
         Button startGame = new Button("Begin Jeopardy");
         Button excelReader = new Button("Get categories from spreadsheet and begin game");
-        addCategory.setAlignment(Pos.BOTTOM_LEFT);
         startGame.setAlignment(Pos.BOTTOM_RIGHT);
         startGame.setOnAction((event) -> {
             stage.close();
@@ -39,26 +38,26 @@ public class JeopardySettingsGUI extends Application {
                 exception.printStackTrace();
             }
         });
-        vBox.getChildren().addAll(addCategory,startGame,excelReader);
+        vBox.getChildren().addAll(startGame,excelReader);
     }
 
     private void finalJeopardyOptionSetUp(VBox vBox) {
+        Text finalJeopardyPrompt = new Text("Include Final Jeopardy?");
         TextField finalJeopardyQuestion = new TextField();
         finalJeopardyQuestion.setPromptText("Enter final jeopardy question");
         TextField finalJeopardyAnswer = new TextField();
         finalJeopardyAnswer.setPromptText("Enter final jeopardy answer");
+        finalJeopardyOption.setSelected(true);
         finalJeopardyOption.setOnAction((event) -> {
-            if(!finalJeopardyOption.isSelected()){
-                vBox.getChildren().addAll(finalJeopardyQuestion,finalJeopardyAnswer);
+            if(finalJeopardyOption.isSelected()){
+                finalJeopardyQuestion.setVisible(true);
+                finalJeopardyAnswer.setVisible(true);
             }else{
-                try{
-                    vBox.getChildren().removeAll(finalJeopardyQuestion,finalJeopardyAnswer);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
+                finalJeopardyQuestion.setVisible(false);
+                finalJeopardyAnswer.setVisible(false);
             }
         });
-        vBox.getChildren().add(finalJeopardyOption);
+        vBox.getChildren().addAll(finalJeopardyPrompt, finalJeopardyOption, finalJeopardyQuestion, finalJeopardyAnswer);
     }
 
     private void settingsSetUp(VBox vBox) {
@@ -73,5 +72,8 @@ public class JeopardySettingsGUI extends Application {
             answer.setPromptText(String.format("Enter answer for $%d", 200 + 200*i));
             vBox.getChildren().addAll(question,answer);
         }
+        Button addCategory = new Button("Add category");
+        addCategory.setAlignment(Pos.BOTTOM_LEFT);
+        vBox.getChildren().add(addCategory);
     }
 }

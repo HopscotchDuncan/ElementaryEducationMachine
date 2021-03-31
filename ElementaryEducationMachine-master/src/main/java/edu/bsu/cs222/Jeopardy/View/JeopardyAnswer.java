@@ -19,7 +19,7 @@ public class JeopardyAnswer extends Stage {
     private Scene createUI() {
         VBox vBox = new VBox();
         Button close = new Button("Return to Board");
-        close.setOnAction((event) -> close());
+        close.setOnAction(event -> close());
         vBox.getChildren().addAll(answer, close);
         return new Scene(vBox);
     }

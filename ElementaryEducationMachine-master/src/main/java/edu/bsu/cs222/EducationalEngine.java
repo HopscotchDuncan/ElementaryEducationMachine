@@ -1,7 +1,6 @@
 package edu.bsu.cs222;
 
 import edu.bsu.cs222.Hangman.View.inputBox;
-import edu.bsu.cs222.Jeopardy.View.JeopardyGUI;
 import edu.bsu.cs222.Jeopardy.View.JeopardySettingsGUI;
 import javafx.application.Application;
 import javafx.scene.Scene;

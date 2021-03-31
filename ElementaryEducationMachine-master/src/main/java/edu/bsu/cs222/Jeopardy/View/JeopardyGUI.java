@@ -47,7 +47,7 @@ public class JeopardyGUI extends Application {
             finalJeopardyQuestion.show();
             stage.close();
         });
-        gridPane.add(skipToFinalJeopardy, 6,9);
+        gridPane.add(skipToFinalJeopardy, 5,9);
         layout.getChildren().add(gridPane);
     }
 }
