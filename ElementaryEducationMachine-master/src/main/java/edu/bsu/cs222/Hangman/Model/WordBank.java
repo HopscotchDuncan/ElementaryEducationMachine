@@ -1,18 +1,47 @@
 package edu.bsu.cs222.Hangman.Model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class WordBank {
-    HashMap<String,String> wordAndDefinition = new HashMap<>();
+
+    Map<String, String> wordAndDefinition = new HashMap<>();
+    ArrayList<String> wordList = new ArrayList<>();
+
+    public WordBank(){
+
+        wordAndDefinition.put("Sam", "Rar");
+
+    }
 
     public void mapWordAndDefinition(String word, String definition){
 
-        wordAndDefinition.put(word, definition);
+        this.wordAndDefinition.put(word, definition);
+
     }
 
 
-    public HashMap<String,String> printWordAndDefinition(){
+    public Map<String,String> getWordAndDefinition(){
 
-        return wordAndDefinition;
+
+        return this.wordAndDefinition;
+    }
+
+    public void addToArrayList(String Word){
+        wordList.add(Word);
+    }
+
+     public String getRandomWord(){
+       /* Random r = new Random();
+
+        int randomString = r.nextInt(wordList.size());
+        String word = wordList.get(randomString);*/
+
+        return "game";
+    }
+
+    public Map<String, String> getDefinition() {
+        return getWordAndDefinition();
     }
 }

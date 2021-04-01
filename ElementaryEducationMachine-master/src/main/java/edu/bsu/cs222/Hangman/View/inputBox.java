@@ -71,7 +71,7 @@ public class inputBox extends Stage {
         Button StartGameButton = createStartGameButton();
         Button addWordButton =  createAddAWordButton();
         WordBank wordBank = new WordBank();
-        inputBox.inputBoxTextsFields inputBoxTextsFields = new inputBoxTextsFields();
+       JavaFXEffects javaFX = new JavaFXEffects();
 
         inputBoxButtons(){
             setSpacing(20);
@@ -85,9 +85,9 @@ public class inputBox extends Stage {
             Button startGame = new Button("Start game");
 
             startGame.setOnAction(event -> {
-                hangman guiDuringGame = new hangman();
 
-                setScene(new Scene(guiDuringGame, 800, 800));
+                setScene(new saveMan());
+
             });
 
             startGame.setEffect(createDropShadow());
@@ -106,9 +106,12 @@ public class inputBox extends Stage {
                 String definition = definitionTextField.getText();
 
                 wordBank.mapWordAndDefinition(word, definition);
+                wordBank.addToArrayList(word);
 
                 wordTextField.setText("");
                 definitionTextField.setText("");
+                System.out.printf(String.valueOf(wordBank.getWordAndDefinition()));
+
             });
 
             addWordButton.setEffect(createDropShadow());
