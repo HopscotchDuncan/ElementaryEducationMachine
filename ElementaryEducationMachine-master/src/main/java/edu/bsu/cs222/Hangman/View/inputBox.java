@@ -1,6 +1,7 @@
 package edu.bsu.cs222.Hangman.View;
 
 import edu.bsu.cs222.Hangman.Model.WordBank;
+import edu.bsu.cs222.Hangman.Model.randomizeWords;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +11,8 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.Map;
 
 
 public class inputBox extends Stage {
@@ -66,11 +69,11 @@ public class inputBox extends Stage {
 
     }
 
-    class inputBoxButtons extends VBox {
-
+    private class inputBoxButtons extends VBox {
         Button StartGameButton = createStartGameButton();
         Button addWordButton =  createAddAWordButton();
-        WordBank wordBank = new WordBank();
+        randomizeWords randomizeWords = new randomizeWords();
+
        JavaFXEffects javaFX = new JavaFXEffects();
 
         inputBoxButtons(){
@@ -81,22 +84,12 @@ public class inputBox extends Stage {
         }
 
 
-        private Button createStartGameButton() {
-            Button startGame = new Button("Start game");
 
-            startGame.setOnAction(event -> {
-
-                setScene(new saveMan());
-
-            });
-
-            startGame.setEffect(createDropShadow());
-
-            return startGame;
-        }
 
         private Button createAddAWordButton() {
+
             Button addWordButton = new Button("Add Word");
+
 
             addWordButton.setOnAction(event -> {
                 TextField wordTextField = getWordTextField();
@@ -105,18 +98,31 @@ public class inputBox extends Stage {
                 String word = wordTextField.getText();
                 String definition = definitionTextField.getText();
 
-                wordBank.mapWordAndDefinition(word, definition);
-                wordBank.addToArrayList(word);
+                WordBank.getWordBank().mapWordAndDefinition(word, definition);
+                WordBank.getWordBank().addToArrayList(word);
 
                 wordTextField.setText("");
                 definitionTextField.setText("");
-                System.out.printf(String.valueOf(wordBank.getWordAndDefinition()));
 
             });
 
             addWordButton.setEffect(createDropShadow());
 
             return addWordButton;
+        }
+        public Button createStartGameButton() {
+            Button startGame = new Button("Start game");
+
+            startGame.setOnAction(event -> {
+                randomizeWords.setRandomWord();
+
+                setScene(new saveMan());
+
+            });
+
+            startGame.setEffect(createDropShadow());
+
+            return startGame;
         }
 
         private DropShadow createDropShadow(){
@@ -128,6 +134,7 @@ public class inputBox extends Stage {
 
             return dropShadow;
         }
+
 
     }
 }

@@ -6,42 +6,59 @@ import java.util.Map;
 
 public class WordBank {
 
-    Map<String, String> wordAndDefinition = new HashMap<>();
-    ArrayList<String> wordList = new ArrayList<>();
+    public static WordBank wordBank = null;
+
+    private final  Map<String, String> wordAndDefinition = new HashMap<>();
+    public ArrayList<String> wordList = new ArrayList<>();
+
+    private String word;
+    private  String definition;
+
+    private String usedWord;
 
     public WordBank(){
+    }
 
-        wordAndDefinition.put("Sam", "Rar");
-
+    public static WordBank getWordBank(){
+        if (wordBank == null){
+          wordBank = new WordBank();
+        }
+        return wordBank;
     }
 
     public void mapWordAndDefinition(String word, String definition){
-
-        this.wordAndDefinition.put(word, definition);
-
+        this.word = word;
+        this.definition= definition;
+        map();
+    }
+    public void removeWord(String word){
+        wordList.remove(word);
     }
 
-
-    public Map<String,String> getWordAndDefinition(){
-
-
-        return this.wordAndDefinition;
+    public void setUsedWord(String usedWord){
+        this.usedWord = usedWord;
     }
 
+    public String getDefinition(){
+        return wordAndDefinition.get(usedWord);
+
+    }
     public void addToArrayList(String Word){
-        wordList.add(Word);
+        this.word = Word;
+        addWordList();
     }
 
-     public String getRandomWord(){
-       /* Random r = new Random();
 
-        int randomString = r.nextInt(wordList.size());
-        String word = wordList.get(randomString);*/
-
-        return "game";
+    private void map(){
+        wordAndDefinition.put(word, definition);
     }
 
-    public Map<String, String> getDefinition() {
-        return getWordAndDefinition();
+
+    private void addWordList(){
+        wordList.add(word);
     }
+
+
+
+
 }
