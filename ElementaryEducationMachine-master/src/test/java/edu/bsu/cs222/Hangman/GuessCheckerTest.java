@@ -4,11 +4,11 @@ import edu.bsu.cs222.Hangman.Model.GuessChecker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class GuessCheckerTest {
+//public class GuessCheckerTest {
 
-    GuessChecker hangmanChecker = new GuessChecker();
+    //GuessChecker hangmanChecker = new GuessChecker();
 
-    @Test
+    /*@Test
     public void testIsLetterCorrect(){
         Assertions.assertTrue(hangmanChecker.checkLetter("t", "True"));
     }
@@ -27,4 +27,4 @@ public class GuessCheckerTest {
     public void testIsWordCorrectFalse(){
         Assertions.assertFalse(hangmanChecker.checkWord("Yes","No"));
     }
-}
+}*/

@@ -14,7 +14,7 @@ public class WordBank {
     private String word;
     private  String definition;
 
-    private String usedWord;
+    public String usedWord;
 
     public WordBank(){
     }

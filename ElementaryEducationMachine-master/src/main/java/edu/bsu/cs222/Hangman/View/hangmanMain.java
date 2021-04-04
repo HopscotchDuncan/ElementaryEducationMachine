@@ -59,7 +59,7 @@ public class hangmanMain extends Application {
         primaryStage.setTitle("Hangman");
         primaryStage.setResizable(true);
         setUpShape(outerBox);
-        activateMainButton();
+      //  activateMainButton();
         primaryStage.setHeight(800);
         primaryStage.setWidth(1280);
         primaryStage.setScene(new Scene(outerBox));
@@ -83,7 +83,7 @@ public class hangmanMain extends Application {
         rightLeg.setVisible(false);
     }
 
-    public void activateMainButton(){
+   /* public void activateMainButton(){
         button.setText("Guess");
         button.setOnAction((event) -> {
             if(guess.getText().length()>1){
@@ -109,7 +109,7 @@ public class hangmanMain extends Application {
                 reaction.setText("No text inputted");
             }
         });
-    }
+    }*/
 
     private HBox makeInputBox(){
         HBox box = new HBox();
@@ -194,7 +194,7 @@ public class hangmanMain extends Application {
         reaction.setText("");
         getNewWord();
         wordLabel.setText("_".repeat(solution.length()));
-        activateMainButton();
+      //  activateMainButton();
         incrementHangman();
     }
 
