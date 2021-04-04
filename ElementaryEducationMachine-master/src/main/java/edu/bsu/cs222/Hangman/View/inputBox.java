@@ -1,56 +1,133 @@
 package edu.bsu.cs222.Hangman.View;
 
 import edu.bsu.cs222.Hangman.Model.WordBank;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
 public class inputBox extends Stage {
+    inputBoxTextsFields inputBoxTextsFields = new inputBoxTextsFields();
+    inputBoxButtons inputBoxButtons = new inputBoxButtons();
+
 
     public inputBox(){
+        setTitle("Input Box");
         Scene scene = createUI();
 
         setScene(scene);
     }
 
 
-    public Scene createUI(){
+    private Scene createUI(){
         VBox layout = new VBox(20);
-        Button addAWordButton = createAddAWordButton();
-        Button startGameButton = createStartGameButton();
-        TextField wordInputTextField = creatWordInputTextField();
-        TextField definitionInputTextField = createdefinitionTextField();
 
-        layout.getChildren().addAll(wordInputTextField,definitionInputTextField,addAWordButton,startGameButton);
-        return new Scene(layout, 300, 200);
+        layout.getChildren().addAll(inputBoxTextsFields, inputBoxButtons);
+        layout.setPadding(new Insets(100));
+        layout.setAlignment(Pos.CENTER);
+
+        return new Scene(layout, 350, 250);
+    }
+    public TextField getWordTextField(){
+        return this.inputBoxTextsFields.wordTextField;
+    }
+    public TextField getDefinitionTextField(){
+        return this.inputBoxTextsFields.definitionTextField;
     }
 
-    private TextField createdefinitionTextField() {
-        TextField textField = new TextField();
-        textField.setPromptText("Enter in Definition Here");
-        return textField;
+
+
+    public static class inputBoxTextsFields extends VBox {
+        TextField wordTextField = createWordInputTextField();
+        TextField definitionTextField = createDefinitionTextField();
+
+        public inputBoxTextsFields() {
+            getChildren().addAll((wordTextField), definitionTextField);
+            setSpacing(20);
+        }
+
+        public TextField createDefinitionTextField() {
+            TextField textField = new TextField();
+            textField.setPromptText("Enter in Definition Here");
+            return textField;
+        }
+
+        public TextField createWordInputTextField() {
+            TextField textField = new TextField();
+            textField.setPromptText("Enter in Word Here");
+            return textField;
+        }
+
     }
 
-    private TextField creatWordInputTextField() {
-        TextField textField = new TextField();
-        textField.setPromptText("Enter in Word Here");
-        return textField;
+    class inputBoxButtons extends VBox {
 
-    }
+        Button StartGameButton = createStartGameButton();
+        Button addWordButton =  createAddAWordButton();
+        WordBank wordBank = new WordBank();
+       JavaFXEffects javaFX = new JavaFXEffects();
 
-    private Button createStartGameButton() {
+        inputBoxButtons(){
+            setSpacing(20);
+            getChildren().addAll(addWordButton, StartGameButton);
+            setAlignment(Pos.CENTER);
+            setPadding(new Insets(20));
+        }
 
-        Button startGame = new Button("Start game");
 
+        private Button createStartGameButton() {
+            Button startGame = new Button("Start game");
 
-        return startGame;
-    }
+            startGame.setOnAction(event -> {
 
-    private Button createAddAWordButton() {
-        return new Button("Add Word");
+                setScene(new saveMan());
+
+            });
+
+            startGame.setEffect(createDropShadow());
+
+            return startGame;
+        }
+
+        private Button createAddAWordButton() {
+            Button addWordButton = new Button("Add Word");
+
+            addWordButton.setOnAction(event -> {
+                TextField wordTextField = getWordTextField();
+                TextField definitionTextField = getDefinitionTextField();
+
+                String word = wordTextField.getText();
+                String definition = definitionTextField.getText();
+
+                wordBank.mapWordAndDefinition(word, definition);
+                wordBank.addToArrayList(word);
+
+                wordTextField.setText("");
+                definitionTextField.setText("");
+                System.out.printf(String.valueOf(wordBank.getWordAndDefinition()));
+
+            });
+
+            addWordButton.setEffect(createDropShadow());
+
+            return addWordButton;
+        }
+
+        private DropShadow createDropShadow(){
+            DropShadow dropShadow = new DropShadow();
+            dropShadow.setRadius(.25);
+            dropShadow.setOffsetX(4);
+            dropShadow.setOffsetY(5);
+            dropShadow.setColor(Color.web("#333333"));
+
+            return dropShadow;
+        }
 
     }
 }
