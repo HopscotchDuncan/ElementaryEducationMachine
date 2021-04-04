@@ -8,18 +8,18 @@ edu/bsu/cs222/Hangman/View/saveManManDisplay.java
  edu.bsu.cs222.Hangman.View.saveManManDisplay
 edu/bsu/cs222/Hangman/View/hangmanMain.java
  edu.bsu.cs222.Hangman.View.hangmanMain
-edu/bsu/cs222/Hangman/View/inputBox.java
- edu.bsu.cs222.Hangman.View.inputBox
- edu.bsu.cs222.Hangman.View.inputBox$inputBoxButtons
- edu.bsu.cs222.Hangman.View.inputBox$inputBoxTextsFields
+edu/bsu/cs222/Hangman/View/saveManGuessArea.java
+ edu.bsu.cs222.Hangman.View.saveManGuessArea
 edu/bsu/cs222/Hangman/Model/randomizeWords.java
  edu.bsu.cs222.Hangman.Model.randomizeWords
 edu/bsu/cs222/Hangman/Model/WordBank.java
  edu.bsu.cs222.Hangman.Model.WordBank
 edu/bsu/cs222/Hangman/Model/GuessChecker.java
  edu.bsu.cs222.Hangman.Model.GuessChecker
-edu/bsu/cs222/Hangman/View/saveManGuessArea.java
- edu.bsu.cs222.Hangman.View.saveManGuessArea
+edu/bsu/cs222/Hangman/View/inputBox.java
+ edu.bsu.cs222.Hangman.View.inputBox
+ edu.bsu.cs222.Hangman.View.inputBox$inputBoxButtons
+ edu.bsu.cs222.Hangman.View.inputBox$inputBoxTextsFields
 edu/bsu/cs222/Hangman/View/saveMan.java
  edu.bsu.cs222.Hangman.View.saveMan
 edu/bsu/cs222/Hangman/View/saveManGridPane.java

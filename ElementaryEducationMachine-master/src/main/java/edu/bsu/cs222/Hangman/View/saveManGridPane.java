@@ -17,10 +17,11 @@ public class saveManGridPane extends GridPane {
     public saveManGridPane(){
 
         add(definitionTextArea,0,0,1,1);
-        add(saveManGuessArea, 2, 2, 3, 3);
+        add(new HBox(), 1, 1, 1, 1);
+        add(saveManGuessArea, 2, 2, 1, 1);
 
-        setHgap(100);
-        setVgap(100);
+        setHgap(1);
+        setVgap(1);
 
     }
 

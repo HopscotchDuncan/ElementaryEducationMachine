@@ -7,7 +7,7 @@ public class saveMan extends Scene {
 
     public saveMan(){
 
-        super(new saveManGridPane(), 800,750);
+        super(new saveManGridPane(), 800,800);
 
     }
 
