@@ -1,6 +1,7 @@
 package edu.bsu.cs222;
 
 import edu.bsu.cs222.Hangman.View.inputBox;
+import edu.bsu.cs222.Jeopardy.View.JeopardyGUI;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,13 +13,16 @@ import javafx.stage.Stage;
 
 public class EducationalEngine extends Application {
     inputBox inputBox = new inputBox();
+    JeopardyGUI jeopardyGUI = new JeopardyGUI();
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Button button = createHangmanButton(primaryStage);
+    public void start(Stage primaryStage) {
+        Button saveManButton = createHangmanButton(primaryStage);
+        Button jeopardyButton = createJeopardyButton(primaryStage);
         VBox vbox = new VBox(20);
 
-        vbox.getChildren().add(button);
+        vbox.getChildren().add(saveManButton);
+        vbox.getChildren().add(jeopardyButton);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(10));
 
@@ -27,6 +31,7 @@ public class EducationalEngine extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
     private Button createHangmanButton(Stage stage){
         Button button = new Button("Save Man");
 
@@ -34,7 +39,16 @@ public class EducationalEngine extends Application {
             stage.close();
             inputBox.show();
         });
+        return button;
+    }
 
+    private Button createJeopardyButton(Stage stage){
+        Button button = new Button("Jeopardy");
+
+        button.setOnAction(e -> {
+            stage.close();
+            jeopardyGUI.start(stage);
+        });
         return button;
     }
 }
