@@ -1,7 +1,7 @@
-package edu.bsu.cs222.Hangman.View;
+package edu.bsu.cs222.Saveman.View;
 
-import edu.bsu.cs222.Hangman.Model.WordBank;
-import edu.bsu.cs222.Hangman.Model.randomizeWords;
+import edu.bsu.cs222.Saveman.Model.WordBank;
+import edu.bsu.cs222.Saveman.Model.WordRandomizer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,15 +12,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.util.Map;
+
+public class InputBox extends Stage {
+    InputBoxTextsFields inputBoxTextsFields = new InputBoxTextsFields();
+    InputBoxButtons inputBoxButtons = new InputBoxButtons();
 
 
-public class inputBox extends Stage {
-    inputBoxTextsFields inputBoxTextsFields = new inputBoxTextsFields();
-    inputBoxButtons inputBoxButtons = new inputBoxButtons();
-
-
-    public inputBox(){
+    public InputBox(){
         setTitle("Input Box");
         Scene scene = createUI();
 
@@ -46,11 +44,11 @@ public class inputBox extends Stage {
 
 
 
-    public static class inputBoxTextsFields extends VBox {
+    public static class InputBoxTextsFields extends VBox {
         TextField wordTextField = createWordInputTextField();
         TextField definitionTextField = createDefinitionTextField();
 
-        public inputBoxTextsFields() {
+        public InputBoxTextsFields() {
             getChildren().addAll((wordTextField), definitionTextField);
             setSpacing(20);
         }
@@ -69,15 +67,15 @@ public class inputBox extends Stage {
 
     }
 
-    private class inputBoxButtons extends VBox {
-        Button StartGameButton = createStartGameButton();
+    private class InputBoxButtons extends VBox {
+        Button startGameButton = createStartGameButton();
         Button addWordButton =  createAddAWordButton();
-        randomizeWords randomizeWords = new randomizeWords();
+        WordRandomizer wordRandomizer = new WordRandomizer();
 
 
-        inputBoxButtons(){
+        InputBoxButtons(){
             setSpacing(20);
-            getChildren().addAll(addWordButton, StartGameButton);
+            getChildren().addAll(addWordButton, startGameButton);
             setAlignment(Pos.CENTER);
             setPadding(new Insets(20));
         }
@@ -114,10 +112,10 @@ public class inputBox extends Stage {
             Button startGame = new Button("Start game");
 
             startGame.setOnAction(event -> {
-                randomizeWords.setRandomWord();
+                wordRandomizer.setRandomWord();
 
                 setTitle("Save Man");
-                setScene(new saveMan());
+                setScene(new SaveMan());
 
             });
 

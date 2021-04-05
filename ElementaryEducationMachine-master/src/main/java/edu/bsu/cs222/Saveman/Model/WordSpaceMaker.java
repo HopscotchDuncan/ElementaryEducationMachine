@@ -1,8 +1,8 @@
-package edu.bsu.cs222.Hangman.Model;
+package edu.bsu.cs222.Saveman.Model;
 
 import java.util.Locale;
 
-public class wordSpaceMaker {
+public class WordSpaceMaker {
     StringBuilder wordText = new StringBuilder();
 
 
@@ -25,7 +25,7 @@ public class wordSpaceMaker {
         word = word.toLowerCase(Locale.ROOT);
         for (int i = 0; i < word.length(); i++){
             if (character.equals(String.valueOf(word.charAt(i)))){
-                wordText.replace(i,i+1, String.valueOf(character));
+                wordText.replace(i,i+1, character);
                 wordText.append(" ");
             }
             else{

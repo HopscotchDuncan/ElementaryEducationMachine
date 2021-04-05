@@ -1,6 +1,6 @@
 package edu.bsu.cs222;
 
-import edu.bsu.cs222.Hangman.View.inputBox;
+import edu.bsu.cs222.Saveman.View.InputBox;
 import edu.bsu.cs222.Jeopardy.View.JeopardyGUI;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 
 public class EducationalEngine extends Application {
-    inputBox inputBox = new inputBox();
+    InputBox inputBox = new InputBox();
     JeopardyGUI jeopardyGUI = new JeopardyGUI();
 
     @Override

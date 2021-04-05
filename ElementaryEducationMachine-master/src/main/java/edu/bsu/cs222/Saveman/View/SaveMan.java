@@ -1,6 +1,6 @@
-package edu.bsu.cs222.Hangman.View;
+package edu.bsu.cs222.Saveman.View;
 
-import edu.bsu.cs222.Hangman.Model.*;
+import edu.bsu.cs222.Saveman.Model.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,11 +14,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-public class saveMan extends Scene {
+public class SaveMan extends Scene {
 
-    public saveMan(){
+    public SaveMan(){
 
-        super(new saveManGridPane(), 700,700);
+        super(new SaveManGridPane(), 700,700);
 
     }
 
@@ -28,7 +28,7 @@ public class saveMan extends Scene {
         Button playAgainButton = new Button("Play again");
         Label congratsLabel = new Label("Congrats you got the Word correct");
 
-        edu.bsu.cs222.Hangman.Model.randomizeWords randomizeWords = new randomizeWords();
+        WordRandomizer WordRandomizer = new WordRandomizer();
 
         public EndGameScreen(){
             setPlayAgainButton();
@@ -46,8 +46,8 @@ public class saveMan extends Scene {
         private void setPlayAgainButton() {
 
             playAgainButton.setOnAction(e ->{
-                randomizeWords.setRandomWord();
-                setScene(new saveMan());
+                WordRandomizer.setRandomWord();
+                setScene(new SaveMan());
             });
         }
 
@@ -56,16 +56,16 @@ public class saveMan extends Scene {
         }
     }
 
-    public static class saveManGridPane extends GridPane {
+    public static class SaveManGridPane extends GridPane {
 
-        saveManGridPane.definitionTextArea definitionTextArea = new definitionTextArea();
-        saveManGridPane.saveManGuessArea saveManGuessArea = new saveManGuessArea();
-        saveManGridPane.saveManWordSpace saveManWordSpace = new saveManWordSpace();
-        edu.bsu.cs222.Hangman.Model.wordSpaceMaker wordSpaceMaker = new wordSpaceMaker();
-        saveManGridPane.usedLettersArea usedLettersArea = new usedLettersArea();
-        saveManGridPane.saveManManDisplay saveManManDisplay = new saveManManDisplay();
+        DefinitionTextArea definitionTextArea = new DefinitionTextArea();
+        SaveManGuessArea saveManGuessArea = new SaveManGuessArea();
+        SaveManWordSpace saveManWordSpace = new SaveManWordSpace();
+        WordSpaceMaker wordSpaceMaker = new WordSpaceMaker();
+        UsedLettersArea usedLettersArea = new UsedLettersArea();
+        SaveManManDisplay saveManManDisplay = new SaveManManDisplay();
 
-        public saveManGridPane(){
+        public SaveManGridPane(){
 
 
             add(definitionTextArea,0,0,1,1);
@@ -87,9 +87,9 @@ public class saveMan extends Scene {
         }
 
 
-        public static class definitionTextArea extends VBox {
+        public static class DefinitionTextArea extends VBox {
 
-            public definitionTextArea() {
+            public DefinitionTextArea() {
                 getChildren().addAll(createLabel(), createDefinitionLabel());
 
                 setScaleX(1.6);
@@ -113,14 +113,14 @@ public class saveMan extends Scene {
                 }
         }
 
-        public class saveManGuessArea extends HBox {
+        public class SaveManGuessArea extends HBox {
 
             GuessChecker guessChecker = new GuessChecker();
             TextField guessTextField = new TextField();
-            saveMan.EndGameScreen EndGameScreen = new EndGameScreen();
-            edu.bsu.cs222.Hangman.Model.moveCounter moveCounter = new moveCounter();
+            SaveMan.EndGameScreen EndGameScreen = new EndGameScreen();
+            MoveCounter moveCounter = new MoveCounter();
 
-            public saveManGuessArea(){
+            public SaveManGuessArea(){
                 setSpacing(20);
                 setAlignment(Pos.BOTTOM_RIGHT);
 
@@ -167,7 +167,7 @@ public class saveMan extends Scene {
 
         }
 
-        public class saveManManDisplay extends VBox {
+        public class SaveManManDisplay extends VBox {
             DrawingCreator drawingCreator = new DrawingCreator();
             Circle head;
             Line spine;
@@ -176,7 +176,7 @@ public class saveMan extends Scene {
             Line leftLeg;
             Line rightLeg;
 
-            public saveManManDisplay() {
+            public SaveManManDisplay() {
                 head = drawingCreator.makeHead();
                 spine = drawingCreator.makeSpine();
                 leftArm = drawingCreator.makeLeftArm();
@@ -211,12 +211,12 @@ public class saveMan extends Scene {
             }
         }
 
-        public class saveManWordSpace extends HBox {
-            wordSpaceMaker wordSpaceMaker = new wordSpaceMaker();
+        public class SaveManWordSpace extends HBox {
+            WordSpaceMaker wordSpaceMaker = new WordSpaceMaker();
 
             Label wordSpacelabel = new Label();
 
-            public saveManWordSpace(){
+            public SaveManWordSpace(){
 
                 WordSpaceLabel();
 
@@ -240,12 +240,12 @@ public class saveMan extends Scene {
 
         }
 
-        public static class usedLettersArea extends VBox {
+        public static class UsedLettersArea extends VBox {
             String usedLetters = "";
             Label label = new Label("Used Letters: ");
             Label usedLettersLabel = new Label();
 
-            public usedLettersArea(){
+            public UsedLettersArea(){
                 setSpacing(20);
 
                 getChildren().addAll(label, usedLettersLabel);

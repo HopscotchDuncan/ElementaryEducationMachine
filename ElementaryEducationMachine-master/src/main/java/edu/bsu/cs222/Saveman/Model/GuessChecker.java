@@ -1,4 +1,4 @@
-package edu.bsu.cs222.Hangman.Model;
+package edu.bsu.cs222.Saveman.Model;
 
 public class GuessChecker {
 

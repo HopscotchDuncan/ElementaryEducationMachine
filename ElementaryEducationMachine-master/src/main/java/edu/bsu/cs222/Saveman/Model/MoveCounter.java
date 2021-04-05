@@ -1,10 +1,10 @@
-package edu.bsu.cs222.Hangman.Model;
+package edu.bsu.cs222.Saveman.Model;
 
-import edu.bsu.cs222.Hangman.View.saveMan;
+import edu.bsu.cs222.Saveman.View.SaveMan;
 
-public class moveCounter {
+public class MoveCounter {
     static int movesRemaining = 6;
-    saveMan.EndGameScreen endGameScreen = new saveMan.EndGameScreen();
+    SaveMan.EndGameScreen endGameScreen = new SaveMan.EndGameScreen();
 
     public void moveChecker(){
         movesRemaining = movesRemaining - 1;
