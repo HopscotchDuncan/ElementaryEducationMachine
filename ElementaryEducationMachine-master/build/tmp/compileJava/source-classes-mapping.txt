@@ -1,22 +1,36 @@
-edu/bsu/cs222/Hangman/View/GUIDuringGame.java
- edu.bsu.cs222.Hangman.View.GUIDuringGame
-edu/bsu/cs222/Hangman/View/inputBox.java
- edu.bsu.cs222.Hangman.View.inputBox
-edu/bsu/cs222/Hangman/Model/DrawingCreator.java
- edu.bsu.cs222.Hangman.Model.DrawingCreator
-edu/bsu/cs222/Hangman/Model/WordBank.java
- edu.bsu.cs222.Hangman.Model.WordBank
-edu/bsu/cs222/Hangman/View/inputBox2.java
- edu.bsu.cs222.Hangman.View.inputBox2
-edu/bsu/cs222/Hangman/Model/GuessChecker.java
- edu.bsu.cs222.Hangman.Model.GuessChecker
+edu/bsu/cs222/Hangman/Model/wordSpaceMaker.java
+ edu.bsu.cs222.Hangman.Model.wordSpaceMaker
 edu/bsu/cs222/Jeopardy/View/JeopardyAnswer.java
  edu.bsu.cs222.Jeopardy.View.JeopardyAnswer
-edu/bsu/cs222/EducationalEngine.java
- edu.bsu.cs222.EducationalEngine
-edu/bsu/cs222/Jeopardy/View/JeopardyGUI.java
- edu.bsu.cs222.Jeopardy.View.JeopardyGUI
-edu/bsu/cs222/Jeopardy/View/JeopardySettingsGUI.java
- edu.bsu.cs222.Jeopardy.View.JeopardySettingsGUI
 edu/bsu/cs222/Jeopardy/View/JeopardyQuestion.java
  edu.bsu.cs222.Jeopardy.View.JeopardyQuestion
+edu/bsu/cs222/Jeopardy/View/JeopardyGUI.java
+ edu.bsu.cs222.Jeopardy.View.JeopardyGUI
+edu/bsu/cs222/Hangman/Model/randomizeWords.java
+ edu.bsu.cs222.Hangman.Model.randomizeWords
+edu/bsu/cs222/Hangman/Model/WordBank.java
+ edu.bsu.cs222.Hangman.Model.WordBank
+edu/bsu/cs222/Hangman/View/inputBox.java
+ edu.bsu.cs222.Hangman.View.inputBox
+ edu.bsu.cs222.Hangman.View.inputBox$inputBoxButtons
+ edu.bsu.cs222.Hangman.View.inputBox$inputBoxTextsFields
+edu/bsu/cs222/Hangman/Model/GuessChecker.java
+ edu.bsu.cs222.Hangman.Model.GuessChecker
+edu/bsu/cs222/Hangman/Model/moveCounter.java
+ edu.bsu.cs222.Hangman.Model.moveCounter
+edu/bsu/cs222/EducationalEngine.java
+ edu.bsu.cs222.EducationalEngine
+edu/bsu/cs222/Hangman/View/saveMan.java
+ edu.bsu.cs222.Hangman.View.saveMan
+ edu.bsu.cs222.Hangman.View.saveMan$EndGameScreen
+edu/bsu/cs222/Hangman/View/hangmanMain.java
+ edu.bsu.cs222.Hangman.View.hangmanMain
+edu/bsu/cs222/Hangman/Model/DrawingCreator.java
+ edu.bsu.cs222.Hangman.Model.DrawingCreator
+edu/bsu/cs222/Hangman/View/saveManGridPane.java
+ edu.bsu.cs222.Hangman.View.saveManGridPane
+ edu.bsu.cs222.Hangman.View.saveManGridPane$definitionTextArea
+ edu.bsu.cs222.Hangman.View.saveManGridPane$saveManGuessArea
+ edu.bsu.cs222.Hangman.View.saveManGridPane$saveManManDisplay
+ edu.bsu.cs222.Hangman.View.saveManGridPane$saveManWordSpace
+ edu.bsu.cs222.Hangman.View.saveManGridPane$usedLettersArea
