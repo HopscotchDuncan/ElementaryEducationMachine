@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class EducationalEngine extends Application {
     InputBox inputBox = new InputBox();
@@ -17,7 +19,7 @@ public class EducationalEngine extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Button saveManButton = createHangmanButton(primaryStage);
+        Button saveManButton = createSavemanButton(primaryStage);
         Button jeopardyButton = createJeopardyButton(primaryStage);
         VBox vbox = new VBox(20);
 
@@ -32,7 +34,7 @@ public class EducationalEngine extends Application {
         primaryStage.show();
     }
 
-    private Button createHangmanButton(Stage stage){
+    private Button createSavemanButton(Stage stage){
         Button button = new Button("Save Man");
 
         button.setOnAction(e ->{
@@ -47,7 +49,11 @@ public class EducationalEngine extends Application {
 
         button.setOnAction(e -> {
             stage.close();
-            jeopardyGUI.start(stage);
+            try {
+                jeopardyGUI.start(stage);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         });
         return button;
     }
