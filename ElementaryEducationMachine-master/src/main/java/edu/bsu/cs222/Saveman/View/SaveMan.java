@@ -143,7 +143,7 @@ public class SaveMan extends Scene {
 
                             saveManWordSpace.changeWordSpace(word);
                         } else {
-                            usedLettersArea.setUsedLetter(usedLettersArea.addtoUsedLetters(guess));
+                            usedLettersArea.setUsedLetter(usedLettersArea.addToUsedLetters(guess));
                             moveCounter.moveChecker();
                             saveManManDisplay.saveManIncrementer(moveCounter.getMovesRemaining());
                         }
@@ -167,7 +167,7 @@ public class SaveMan extends Scene {
 
         }
 
-        public class SaveManManDisplay extends VBox {
+        public static class SaveManManDisplay extends VBox {
             DrawingCreator drawingCreator = new DrawingCreator();
             Circle head;
             Line spine;
@@ -211,30 +211,30 @@ public class SaveMan extends Scene {
             }
         }
 
-        public class SaveManWordSpace extends HBox {
+        public static class SaveManWordSpace extends HBox {
             WordSpaceMaker wordSpaceMaker = new WordSpaceMaker();
 
-            Label wordSpacelabel = new Label();
+            Label wordSpaceLabel = new Label();
 
             public SaveManWordSpace(){
 
                 WordSpaceLabel();
 
-                getChildren().add(wordSpacelabel);
+                getChildren().add(wordSpaceLabel);
                 setAlignment(Pos.BASELINE_CENTER);
 
             }
 
             public void WordSpaceLabel(){
 
-                wordSpacelabel.setText(String.valueOf(wordSpaceMaker.createDashes()));
+                wordSpaceLabel.setText(String.valueOf(wordSpaceMaker.createDashes()));
 
-                wordSpacelabel.setScaleX(3);
-                wordSpacelabel.setScaleY(2.5);
+                wordSpaceLabel.setScaleX(3);
+                wordSpaceLabel.setScaleY(2.5);
 
             }
             public void changeWordSpace(String stringBuilder){
-                wordSpacelabel.setText(String.valueOf(stringBuilder));
+                wordSpaceLabel.setText(String.valueOf(stringBuilder));
             }
 
 
@@ -258,8 +258,8 @@ public class SaveMan extends Scene {
             public void setUsedLetter(String UsedLetters){
                 usedLettersLabel.setText(UsedLetters);
             }
-            public String addtoUsedLetters(String usedletter){
-                return usedLetters = usedLetters + usedletter + " ";
+            public String addToUsedLetters(String usedLetter){
+                return usedLetters = usedLetters + usedLetter + " ";
             }
 
         }
