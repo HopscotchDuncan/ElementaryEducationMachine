@@ -3,11 +3,13 @@ package edu.bsu.cs222.Hangman.Model;
 public class GuessChecker {
 
     public boolean guessCheck(String guess){
+        boolean check;
 
         if (guess.length() == 1){
-            return checkLetter(guess);
+            check =checkLetter(guess);
         }
-        else {return checkWord(guess);}
+        else {check = checkWord(guess);}
+        return check;
     }
 
     public boolean checkLetter(String guess){

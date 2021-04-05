@@ -15,7 +15,7 @@ public class DrawingCreator {
 
     public Line makeSpine() {
         Line spine = new Line();
-        spine.setTranslateX(hangmanSpineStartX + 8);
+        spine.setTranslateX(hangmanSpineStartX + 19);
         setStart(spine);
         spine.setEndX(100.0f);
         spine.setEndY(100.0f);
@@ -58,17 +58,17 @@ public class DrawingCreator {
         return rightLeg;
     }
 
-    public void setStart(Line line){
+    private void setStart(Line line){
         line.setStartX(100.0f);
         line.setStartY(0);
     }
 
-    public void setEndToLeft(Line line){
+    private void setEndToLeft(Line line){
         line.setEndX(80.0f);
         line.setEndY(100.0f);
     }
 
-    public void setEndToRight(Line line){
+    private void setEndToRight(Line line){
         line.setEndX(120.0f);
         line.setEndY(100.0f);
     }

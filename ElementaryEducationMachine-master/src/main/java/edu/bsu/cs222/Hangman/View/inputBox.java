@@ -74,7 +74,6 @@ public class inputBox extends Stage {
         Button addWordButton =  createAddAWordButton();
         randomizeWords randomizeWords = new randomizeWords();
 
-       JavaFXEffects javaFX = new JavaFXEffects();
 
         inputBoxButtons(){
             setSpacing(20);
@@ -110,12 +109,14 @@ public class inputBox extends Stage {
 
             return addWordButton;
         }
+
         public Button createStartGameButton() {
             Button startGame = new Button("Start game");
 
             startGame.setOnAction(event -> {
                 randomizeWords.setRandomWord();
 
+                setTitle("Save Man");
                 setScene(new saveMan());
 
             });
