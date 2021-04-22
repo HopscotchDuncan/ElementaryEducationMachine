@@ -1,7 +1,7 @@
 package edu.bsu.cs222;
 
 import edu.bsu.cs222.Hangman.View.inputBox;
-import edu.bsu.cs222.Jeopardy.View.JeopardyGUI;
+import edu.bsu.cs222.Jeopardy.View.ExcelSelector;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,10 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 public class EducationalEngine extends Application {
     inputBox inputBox = new inputBox();
-    JeopardyGUI jeopardyGUI = new JeopardyGUI();
+    ExcelSelector excelSelector = new ExcelSelector();
 
     @Override
     public void start(Stage primaryStage) {
@@ -47,7 +46,11 @@ public class EducationalEngine extends Application {
 
         button.setOnAction(e -> {
             stage.close();
-            jeopardyGUI.start(stage);
+            try {
+                excelSelector.start(stage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
         return button;
     }

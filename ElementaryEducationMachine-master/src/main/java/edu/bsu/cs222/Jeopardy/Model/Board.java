@@ -1,5 +1,7 @@
 package edu.bsu.cs222.Jeopardy.Model;
 
+import edu.bsu.cs222.Jeopardy.View.JeopardyAnswer;
+import edu.bsu.cs222.Jeopardy.View.JeopardyQuestion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -7,55 +9,67 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Board {
-    ArrayList<Category> categories;
-    List<String> finalJeopardy;
-    Button skipToFinalJeopardy = new Button("To Final\nJeopardy->");
+    List<String> categories;
+    Stage stage;
 
-    public Board(ArrayList<Category> categories, List<String> finalJeopardy){
+    public Board(List<String> categories, Stage stage){
         this.categories = categories;
-        this.finalJeopardy = finalJeopardy;
+        this.stage = stage;
     }
 
-
-    //sets up one column at a time, for the full 6
-    private void boardSetUp(StackPane layout, Stage stage) {
+    public GridPane boardSetUp() {
         GridPane gridPane = new GridPane();
-        for(int i = 0; i<categories.size(); i++){
-            Text exampleCategory = new Text("Example");
-            stylizeCategory(exampleCategory);
-            gridPane.add(exampleCategory,i,0);
-            for(int j = 0; j<5; j++){
+        for(int i = 0; i<categories.size()/11; i++){
+            int parseIndex = 11 * i;
+            Text Category = new Text(categories.get(parseIndex));
+            stylizeCategory(Category);
+            gridPane.add(Category,i,0);
+            for(int j = 1; j<=9; j+=2){
                 Button button = new Button();
-                stylizeButton(button);
-                button.setText(String.format("$%d", 200 + 200*j));
-                button.setOnAction((event) -> {
-                    button.setDisable(true);
-                    button.setText("");
-                });
+                buttonSetUp(parseIndex, j, button);
                 gridPane.add(button,i,j+1);
             }
         }
         gridPane.setAlignment(Pos.CENTER);
-        finalJeopardySetUp(layout, stage, gridPane);
+        if(categories.contains("Final Jeopardy")){
+            finalJeopardySetUp(gridPane);
+        }
+        return gridPane;
     }
 
-    private void finalJeopardySetUp(StackPane layout, Stage stage, GridPane gridPane) {
+    private void buttonSetUp(int parseIndex, int j, Button button) {
+        stylizeButton(button);
+        button.setText(String.format("$%d", 200 + 200 * (j/2)));
+        JeopardyAnswer jeopardyAnswer = new JeopardyAnswer(categories.get(parseIndex + j +1),"Return to board");
+        JeopardyQuestion jeopardyQuestion = new JeopardyQuestion(categories.get(parseIndex + j),jeopardyAnswer);
+        button.setOnAction((event) -> {
+            jeopardyQuestion.show();
+            button.setDisable(true);
+            button.setText("");
+        });
+    }
+
+    private void finalJeopardySetUp(GridPane gridPane) {
+        Button skipToFinalJeopardy = new Button("To Final\nJeopardy->");
         stylizeButton(skipToFinalJeopardy);
+        int finalJeopardyPosition = categories.indexOf("Final Jeopardy");
+        JeopardyAnswer jeopardyAnswer = new JeopardyAnswer(categories.get(finalJeopardyPosition+2),"Finish Game");
+        JeopardyQuestion jeopardyQuestion = new JeopardyQuestion(categories.get(finalJeopardyPosition+1),jeopardyAnswer);
         skipToFinalJeopardy.setOnAction((event) -> {
-            finalJeopardyQuestion.show();
+            jeopardyQuestion.show();
             stage.close();
         });
-        gridPane.add(skipToFinalJeopardy, 5,9);
-        layout.getChildren().add(gridPane);
+        gridPane.add(skipToFinalJeopardy, 5, 11);
     }
 
     private void stylizeCategory(Text text) {
         text.setStyle("-fx-font-size:20;" +
                 "-fx-text-alignment:center;");
+        text.setWrappingWidth(200);
         text.setFill(Color.GOLD);
     }
 

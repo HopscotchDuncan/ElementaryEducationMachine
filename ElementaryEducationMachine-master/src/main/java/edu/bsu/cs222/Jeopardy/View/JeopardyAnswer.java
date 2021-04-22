@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class JeopardyAnswer extends Stage {
-
     private final Label answer;
     private final String buttonText;
 
@@ -29,7 +28,7 @@ public class JeopardyAnswer extends Stage {
         vBox.getChildren().addAll(answer, close);
         vBox.setMinSize(1000,300);
         vBox.setMaxSize(1000,600);
-        vBox.setAlignment(Pos.BOTTOM_RIGHT);
+        vBox.setAlignment(Pos.CENTER);
         return new Scene(vBox);
     }
 
