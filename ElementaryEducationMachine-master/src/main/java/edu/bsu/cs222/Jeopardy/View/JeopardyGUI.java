@@ -1,7 +1,5 @@
 package edu.bsu.cs222.Jeopardy.View;
 
-import edu.bsu.cs222.Jeopardy.Model.ExcelTransferer;
-import edu.bsu.cs222.Jeopardy.Model.LocationFinder;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,27 +10,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class JeopardyGUI extends Application {
 
-    ExcelTransferer transferer = new ExcelTransferer();
-    LocationFinder finder = new LocationFinder();
-    JeopardyQuestion question = null;
-    JeopardyAnswer answer = null;
-    JeopardyAnswer finalJeopardyAnswer; { try {
-            finalJeopardyAnswer = new JeopardyAnswer(transferer.getExcelData(1,13), "Quit Game");
-        } catch (IOException e) {
-            e.printStackTrace(); }
-    }
-    JeopardyQuestion finalJeopardyQuestion;{
-        try {
-            finalJeopardyQuestion = new JeopardyQuestion(transferer.getExcelData(0,13), finalJeopardyAnswer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    JeopardyAnswer exampleAnswer = new JeopardyAnswer("What is an extremely long String value for both Question and Answer for the purpose of testing",
+            "Return to Board");
+    JeopardyQuestion exampleQuestion = new JeopardyQuestion("This is something that Robert is using to test longer questions and answers," +
+            " making it possible to see both if the text aligns correctly, but if the formatting is correct.", exampleAnswer);
+    JeopardyAnswer finalJeopardyAnswer = new JeopardyAnswer("Example Final Jeopardy Answer", "Quit Game");
+    JeopardyQuestion finalJeopardyQuestion = new JeopardyQuestion("Example Final Jeopardy", finalJeopardyAnswer);
     Button skipToFinalJeopardy = new Button("To Final\nJeopardy->");
 
     public static void main(String[] args) {
@@ -40,7 +25,7 @@ public class JeopardyGUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage){
         StackPane layout = new StackPane();
         boardSetUp(layout, primaryStage);
         layout.setStyle("-fx-background-color:blue");
@@ -49,34 +34,18 @@ public class JeopardyGUI extends Application {
     }
 
     //sets up one column at a time, for the full 6
-    private void boardSetUp(StackPane layout, Stage stage) throws IOException {
+    private void boardSetUp(StackPane layout, Stage stage) {
         GridPane gridPane = new GridPane();
-        int location = 1;
         for(int i = 0; i<6; i++){
-            Text category = new Text(transferer.getExcelData(0,location));
-            location += 2;
-            stylizeCategory(category);
-            gridPane.add(category,i,0);
+            Text exampleCategory = new Text("Example");
+            stylizeCategory(exampleCategory);
+            gridPane.add(exampleCategory,i,0);
             for(int j = 0; j<5; j++){
                 Button button = new Button();
                 stylizeButton(button);
-                int categoryNumber = i+1;
-                int questionAmount = 100 * j + 100;
-                button.setText("Category " + categoryNumber + ":\n" + questionAmount);
+                button.setText(String.format("$%d", 200 + 200*j));
                 button.setOnAction((event) -> {
-                    int rowLocation = finder.findRowLocation(button.getText());
-                    int columnLocation = finder.findColumnLocation(button.getText());
-                    try { answer = new JeopardyAnswer(transferer.getExcelData(rowLocation+1, columnLocation),
-                            "Return to Board");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        question = new JeopardyQuestion(transferer.getExcelData(rowLocation, columnLocation), answer);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    question.show();
+                    exampleQuestion.show();
                     button.setDisable(true);
                     button.setText("");
                 });

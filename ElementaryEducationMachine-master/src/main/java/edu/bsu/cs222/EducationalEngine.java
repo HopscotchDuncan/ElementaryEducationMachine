@@ -1,7 +1,7 @@
 package edu.bsu.cs222;
 
-import edu.bsu.cs222.Saveman.View.InputBox;
-import edu.bsu.cs222.Jeopardy.View.JeopardyGUI;
+import edu.bsu.cs222.Hangman.View.inputBox;
+import edu.bsu.cs222.Jeopardy.View.ExcelSelector;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,16 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-
 public class EducationalEngine extends Application {
-    InputBox inputBox = new InputBox();
-    JeopardyGUI jeopardyGUI = new JeopardyGUI();
+    inputBox inputBox = new inputBox();
+    ExcelSelector excelSelector = new ExcelSelector();
 
     @Override
     public void start(Stage primaryStage) {
-        Button saveManButton = createSavemanButton(primaryStage);
+        Button saveManButton = createHangmanButton(primaryStage);
         Button jeopardyButton = createJeopardyButton(primaryStage);
         VBox vbox = new VBox(20);
 
@@ -34,7 +31,7 @@ public class EducationalEngine extends Application {
         primaryStage.show();
     }
 
-    private Button createSavemanButton(Stage stage){
+    private Button createHangmanButton(Stage stage){
         Button button = new Button("Save Man");
 
         button.setOnAction(e ->{
@@ -50,9 +47,9 @@ public class EducationalEngine extends Application {
         button.setOnAction(e -> {
             stage.close();
             try {
-                jeopardyGUI.start(stage);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+                excelSelector.start(stage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         });
         return button;

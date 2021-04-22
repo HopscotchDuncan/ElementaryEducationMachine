@@ -31,7 +31,7 @@ public class JeopardyQuestion extends Stage{
         vBox.getChildren().addAll(question, revealAnswer);
         vBox.setMinSize(1000,300);
         vBox.setMaxSize(1000,600);
-        vBox.setAlignment(Pos.BOTTOM_RIGHT);
+        vBox.setAlignment(Pos.CENTER);
         return new Scene(vBox);
     }
 
