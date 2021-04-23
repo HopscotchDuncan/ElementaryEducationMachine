@@ -33,11 +33,11 @@ edu/bsu/cs222/Hangman/View/inputBox.java
  edu.bsu.cs222.Hangman.View.inputBox
  edu.bsu.cs222.Hangman.View.inputBox$inputBoxButtons
  edu.bsu.cs222.Hangman.View.inputBox$inputBoxTextsFields
-edu/bsu/cs222/Jeopardy/View/ExcelSelector.java
- edu.bsu.cs222.Jeopardy.View.ExcelSelector
 edu/bsu/cs222/Jeopardy/View/JeopardyManualInput.java
  edu.bsu.cs222.Jeopardy.View.JeopardyManualInput
 edu/bsu/cs222/EducationalEngine.java
  edu.bsu.cs222.EducationalEngine
+edu/bsu/cs222/Jeopardy/View/ExcelSelector.java
+ edu.bsu.cs222.Jeopardy.View.ExcelSelector
 edu/bsu/cs222/Jeopardy/View/JeopardyChoice.java
  edu.bsu.cs222.Jeopardy.View.JeopardyChoice
