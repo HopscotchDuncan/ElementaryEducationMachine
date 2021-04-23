@@ -21,7 +21,7 @@ public class JeopardyChoice extends Application {
         vbox.getChildren().add(jeopardyButton);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(10));
-        Scene scene = new Scene(vbox, 150, 150);
+        Scene scene = new Scene(vbox, 200, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -40,7 +40,7 @@ public class JeopardyChoice extends Application {
     }
 
     private Button createExcelInputButton(Stage stage){
-        Button button = new Button("Get Game From Excel Document");
+        Button button = new Button("Get Game From\nExcel Document");
         button.setOnAction(e -> {
             stage.close();
             try {

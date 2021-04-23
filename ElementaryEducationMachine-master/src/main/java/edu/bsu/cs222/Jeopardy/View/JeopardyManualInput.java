@@ -88,17 +88,11 @@ public class JeopardyManualInput extends Application {
     }
 
     private void settingsSetUp(VBox vBox) {
-        categoryTitle.setPromptText("Enter category title here");
-        question200.setPromptText("Enter Question for 200");
-        answer200.setPromptText("Enter Answer for 200");
-        question400.setPromptText("Enter Question for 400");
-        answer400.setPromptText("Enter Answer for 400");
-        question600.setPromptText("Enter Question for 600");
-        answer600.setPromptText("Enter Answer for 600");
-        question800.setPromptText("Enter Question for 800");
-        answer800.setPromptText("Enter Answer for 800");
-        question1000.setPromptText("Enter Question for 1000");
-        answer1000.setPromptText("Enter Answer for 1000");
+        categoryTitle.setPromptText("Enter Category Title");
+        for(int i = 1; i<fullCategory.length; i+=2){
+            fullCategory[i].setPromptText(String.format("Enter The %d Question", 200 + 200 * (i/2)));
+            fullCategory[i+1].setPromptText(String.format("Enter The %d Answer", 200 + 200 * (i/2)));
+        }
         vBox.getChildren().addAll(categoryTitle, question200, answer200, question400, answer400, question600,
                 answer600, question800, answer800, question1000, answer1000);
         Button addCategory = new Button("Add category");
@@ -111,36 +105,18 @@ public class JeopardyManualInput extends Application {
         button.setOnAction(event -> {
             try{
                 nullCatcher(fullCategory);
-                categories.add(categoryTitle.getText());
-                categoryTitle.clear();
-                categories.add(question200.getText());
-                question200.clear();
-                categories.add(answer200.getText());
-                answer200.clear();
-                categories.add(question400.getText());
-                question400.clear();
-                categories.add(answer400.getText());
-                answer400.clear();
-                categories.add(question600.getText());
-                question600.clear();
-                categories.add(answer600.getText());
-                answer600.clear();
-                categories.add(question800.getText());
-                question800.clear();
-                categories.add(answer800.getText());
-                answer800.clear();
-                categories.add(question1000.getText());
-                question1000.clear();
-                categories.add(answer1000.getText());
-                answer1000.clear();
+                for(TextField t : fullCategory){
+                    categories.add(t.getText());
+                    t.clear();
+                }
             }catch (Exception e){
                 e.printStackTrace();
             }
         });
     }
 
-    private void nullCatcher(TextField[] fullCategory) {
-        for(TextField t : fullCategory){
+    private void nullCatcher(TextField[] textFields) {
+        for(TextField t : textFields){
             if(t.getText().isEmpty()){
                 throw new NullPointerException();
             }
