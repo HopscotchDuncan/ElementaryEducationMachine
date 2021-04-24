@@ -1,8 +1,5 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.Jeopardy.View;
 
-import edu.bsu.cs222.Hangman.View.inputBox;
-import edu.bsu.cs222.Jeopardy.View.ExcelSelector;
-import edu.bsu.cs222.Jeopardy.View.JeopardyChoice;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,44 +8,43 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EducationalEngine extends Application {
-    inputBox inputBox = new inputBox();
-    JeopardyChoice jeopardyChoice = new JeopardyChoice();
+public class JeopardyChoice extends Application {
+    JeopardyManualInput jeopardyManualInput = new JeopardyManualInput();
+    ExcelSelector excelSelector = new ExcelSelector();
 
     @Override
     public void start(Stage primaryStage) {
-        Button saveManButton = createHangmanButton(primaryStage);
-        Button jeopardyButton = createJeopardyButton(primaryStage);
+        Button saveManButton = createManualInputButton(primaryStage);
+        Button jeopardyButton = createExcelInputButton(primaryStage);
         VBox vbox = new VBox(20);
-
         vbox.getChildren().add(saveManButton);
         vbox.getChildren().add(jeopardyButton);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(10));
-
-        Scene scene = new Scene(vbox, 150, 150);
-
+        Scene scene = new Scene(vbox, 200, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private Button createHangmanButton(Stage stage){
-        Button button = new Button("Save Man");
-
+    private Button createManualInputButton(Stage stage){
+        Button button = new Button("Create Game Manually");
         button.setOnAction(e ->{
             stage.close();
-            inputBox.show();
+            try {
+                jeopardyManualInput.start(stage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
         return button;
     }
 
-    private Button createJeopardyButton(Stage stage){
-        Button button = new Button("Jeopardy");
-
+    private Button createExcelInputButton(Stage stage){
+        Button button = new Button("Get Game From\nExcel Document");
         button.setOnAction(e -> {
             stage.close();
             try {
-                jeopardyChoice.start(stage);
+                excelSelector.start(stage);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

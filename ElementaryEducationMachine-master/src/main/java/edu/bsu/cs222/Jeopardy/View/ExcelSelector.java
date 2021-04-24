@@ -37,6 +37,7 @@ public class ExcelSelector extends Application {
             chooser.setFileFilter(filter);
             chooser.showOpenDialog(null);
             jeopardyFile = new File(chooser.getSelectedFile().getAbsolutePath());
+            System.out.println(chooser.getSelectedFile().getAbsolutePath());
             fileName.setText(jeopardyFile.getName());
         });
     }
