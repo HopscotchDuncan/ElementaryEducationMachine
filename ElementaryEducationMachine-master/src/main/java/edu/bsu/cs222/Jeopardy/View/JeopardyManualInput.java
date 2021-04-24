@@ -4,6 +4,7 @@ import edu.bsu.cs222.Jeopardy.Model.Board;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -49,16 +50,31 @@ public class JeopardyManualInput extends Application {
         Button startGame = new Button("Begin Jeopardy");
         startGame.setAlignment(Pos.BOTTOM_RIGHT);
         startGame.setOnAction((event) -> {
-            finalJeopardyCheck();
             try {
+                categoriesCheck();
+                finalJeopardyCheck();
                 Board jeopardyBoard = new Board(categories, stage);
                 JeopardyGUI jeopardyGUI = new JeopardyGUI(jeopardyBoard.boardSetUp());
                 jeopardyGUI.start(stage);
-            } catch (Exception exception) {
-                exception.printStackTrace();
+            } catch (NullPointerException exception) {
+                createAlert("Please fill out all fields in Final Jeopardy before continuing");
+            }catch (IllegalArgumentException e){
+                createAlert("No categories entered");
             }
         });
         vBox.getChildren().addAll(startGame);
+    }
+
+    private void createAlert(String s) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(s);
+        alert.showAndWait();
+    }
+
+    private void categoriesCheck() {
+        if(categories.isEmpty()){
+            throw new IllegalArgumentException();
+        }
     }
 
     private void finalJeopardyCheck() {
@@ -110,7 +126,7 @@ public class JeopardyManualInput extends Application {
                     t.clear();
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                createAlert("Please enter information for all fields of the Category");
             }
         });
     }

@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ExcelParserTester {
+public class ExcelParserTest {
     File test = new File("C:\\Users\\Robert\\Documents\\JeopardyTest.xlsx");
     ExcelParser excelParser = new ExcelParser(test);
 

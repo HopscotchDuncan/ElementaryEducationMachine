@@ -63,7 +63,7 @@ public class Board {
             jeopardyQuestion.show();
             stage.close();
         });
-        gridPane.add(skipToFinalJeopardy, 5, 11);
+        gridPane.add(skipToFinalJeopardy, gridPane.getColumnCount()-1, gridPane.getRowCount());
     }
 
     private void stylizeCategory(Text text) {
